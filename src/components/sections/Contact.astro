@@ -1,0 +1,149 @@
+---
+import Narrative from '../Narrative.astro';
+import content from '../../content/content.json';
+const s = content.sections.contact;
+const o = content.owner;
+const todo = (t) => (/\[TODO/.test(t ?? '') ? 'todo' : '');
+---
+<Narrative id="contact" s={s} stage="cool" keyIndex={14} class="contact">
+  <ul class="open-to reveal">
+    {s.openTo.map((x) => <li class={todo(x)}>{x}</li>)}
+  </ul>
+  <div class="contact-links reveal">
+    <p class="email-row">
+      <a class="email" href={`mailto:${o.email}`} data-email>{o.email}</a>
+      <button class="btn btn-small" type="button" data-copy-email data-copied={s.copiedLabel}>{s.copyLabel}</button>
+    </p>
+    <p class="socials">
+      {(o.brands || []).map((b) => <a href={b.url} rel="me noopener" target="_blank">{b.name}{b.note ? `, ${b.note}` : ''}</a>)}
+      <a href={o.instagram} rel="me noopener" target="_blank">Instagram{o.instagramHandle ? ` ${o.instagramHandle}` : ''}</a>
+      <a href={o.linkedin} rel="me noopener" target="_blank">LinkedIn</a>
+      <a href={o.cv} download>{o.cvLabel}</a>
+    </p>
+  </div>
+</Narrative>
+<section class="section enquiry stage-cool" aria-labelledby="enquiry-h">
+  <div class="wrap">
+    <h3 id="enquiry-h">Send an enquiry</h3>
+    <form class="form" action={`mailto:${o.email}`} method="post" enctype="text/plain" data-enquiry>
+      <div class="field">
+        <label for="f-name">Your name</label>
+        <input id="f-name" name="name" type="text" autocomplete="name" required />
+      </div>
+      <div class="field">
+        <label for="f-email">Your email</label>
+        <input id="f-email" name="email" type="email" autocomplete="email" required />
+      </div>
+      <div class="field">
+        <label for="f-about">What it's about</label>
+        <select id="f-about" name="about">
+          {s.openTo.map((x) => <option>{x.replace('[TODO] ', '')}</option>)}
+          <option>Something else</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="f-msg">Message</label>
+        <textarea id="f-msg" name="message" rows="5" required></textarea>
+      </div>
+      <div class="row">
+        <button class="btn btn-fill" type="submit">Open in my email app</button>
+        <span class="quiet small">{s.formNote}</span>
+      </div>
+    </form>
+  </div>
+</section>
+
+<style>
+  .open-to {
+    list-style: none;
+    padding: 0;
+    margin: 1.25rem 0 0;
+    display: grid;
+    gap: 0.25rem;
+    font-size: 1.125rem;
+  }
+  .open-to li::before {
+    content: '';
+    display: inline-block;
+    width: 1.1em;
+    height: 0.5em;
+    margin-right: 0.6em;
+    border-radius: 50%;
+    background: var(--grain);
+    border: 1px solid rgba(143, 115, 82, 0.5);
+    transform: rotate(-28deg);
+    vertical-align: middle;
+  }
+  .contact-links {
+    margin-top: 2rem;
+  }
+  .email-row {
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .email {
+    font-family: var(--serif);
+    font-size: clamp(1.5rem, 1.2rem + 1.5vw, 2.25rem);
+    text-decoration: none;
+    border-bottom: 2px solid var(--accent);
+    color: var(--accent);
+    overflow-wrap: anywhere;
+  }
+  html:not(.js) [data-copy-email] {
+    display: none;
+  }
+  .socials {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    margin-top: 1rem;
+    font-weight: 600;
+  }
+  .enquiry {
+    padding-top: 0;
+  }
+  .form {
+    display: grid;
+    gap: 1rem;
+    max-width: 36rem;
+    margin-top: 1rem;
+  }
+  .field {
+    display: grid;
+    gap: 0.3rem;
+  }
+  .field label {
+    font-weight: 600;
+    font-size: 1rem;
+  }
+  input,
+  select,
+  textarea {
+    font: inherit;
+    color: inherit;
+    background: var(--panel);
+    border: 1.5px solid var(--rule);
+    border-radius: 0.5rem;
+    padding: 0.6em 0.8em;
+    width: 100%;
+  }
+  input:focus,
+  select:focus,
+  textarea:focus {
+    border-color: var(--ink);
+    outline: 3px solid var(--ember);
+    outline-offset: 2px;
+  }
+  .row {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .small {
+    font-size: 0.9375rem;
+    max-width: 30ch;
+  }
+</style>

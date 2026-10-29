@@ -1,0 +1,49 @@
+---
+// One image element for the whole site. Real photos get AVIF/WebP/JPEG; placeholders stay as SVG.
+import { Picture } from 'astro:assets';
+import { resolvePhoto } from '../utils/photos.js';
+const {
+  src,
+  alt = '',
+  width,
+  height,
+  sizes = '(min-width: 60rem) 50vw, 100vw',
+  loading = 'lazy',
+  fetchpriority,
+  focus, // optional 'x% y%' point to keep in view when the image is cropped
+  class: cls,
+} = Astro.props;
+const style = focus ? `object-position: ${focus}` : undefined;
+const meta = resolvePhoto(src);
+const todo = /\[TODO/.test(alt) ? 'todo' : '';
+---
+{
+  meta ? (
+    <Picture
+      src={meta}
+      alt={alt}
+      formats={['avif', 'webp']}
+      fallbackFormat="jpg"
+      widths={[...new Set([480, 960, 1600, 2400].filter((w) => w < meta.width).concat(meta.width))]}
+      sizes={sizes}
+      loading={loading}
+      decoding="async"
+      fetchpriority={fetchpriority}
+      style={style}
+      class={[cls, todo].filter(Boolean).join(' ')}
+      pictureAttributes={{ class: 'pic' }}
+    />
+  ) : (
+    <img
+      src={src}
+      alt={alt}
+      width={width}
+      height={height}
+      loading={loading}
+      decoding="async"
+      fetchpriority={fetchpriority}
+      style={style}
+      class={[cls, todo].filter(Boolean).join(' ')}
+    />
+  )
+}

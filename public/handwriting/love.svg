@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 260" width="640" height="260" role="img" aria-label="love">
+  <title>love</title>
+  <desc>[TODO] Placeholder handwriting. Replace this file with an SVG trace of her own handwritten word. Keep a single stroked path (or several) with fill="none" so the draw-on animation works.</desc>
+  <g fill="none" stroke="currentColor" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">
+    <!-- l -->
+    <path d="M40 190 C 70 160, 120 70, 112 40 C 106 20, 80 40, 76 90 C 70 150, 60 210, 96 206 C 118 203, 136 180, 150 160" />
+    <!-- o -->
+    <path d="M150 160 C 160 140, 200 128, 208 152 C 216 178, 190 212, 170 206 C 150 200, 160 160, 190 150 C 210 144, 226 158, 236 170" />
+    <!-- v -->
+    <path d="M236 170 C 250 150, 262 140, 268 150 C 276 164, 266 198, 290 204 C 310 208, 326 170, 336 150" />
+    <!-- e -->
+    <path d="M336 150 C 352 140, 372 150, 364 166 C 356 182, 326 184, 330 196 C 336 212, 380 206, 410 180 C 440 155, 470 150, 500 162" />
+  </g>
+</svg>

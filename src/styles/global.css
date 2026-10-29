@@ -1,0 +1,530 @@
+/* ---------- Fonts (self-hosted) ---------- */
+@font-face {
+  font-family: 'Fraunces';
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url('/fonts/fraunces-latin-opsz-normal.woff2') format('woff2-variations');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Fraunces';
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url('/fonts/fraunces-latin-ext-opsz-normal.woff2') format('woff2-variations');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Fraunces';
+  font-style: italic;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url('/fonts/fraunces-latin-opsz-italic.woff2') format('woff2-variations');
+}
+@font-face {
+  font-family: 'Source Sans 3';
+  font-style: normal;
+  font-weight: 200 900;
+  font-display: swap;
+  src: url('/fonts/source-sans-3-latin-wght-normal.woff2') format('woff2-variations');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Source Sans 3';
+  font-style: normal;
+  font-weight: 200 900;
+  font-display: swap;
+  src: url('/fonts/source-sans-3-latin-ext-wght-normal.woff2') format('woff2-variations');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Source Sans 3';
+  font-style: italic;
+  font-weight: 200 900;
+  font-display: swap;
+  src: url('/fonts/source-sans-3-latin-wght-italic.woff2') format('woff2-variations');
+}
+
+/* ---------- Tokens: every colour comes from a pot of jollof ---------- */
+:root {
+  --ivory: #f6efe3;
+  --ivory-deep: #ede2cf;
+  --charcoal: #1f1b18;
+  --ink: var(--charcoal);
+  --ink-soft: #5a5048;
+  --rule: rgba(31, 27, 24, 0.14);
+  --tomato-tint: #f3dcc9;
+  --cream-glow: #fbf2df;
+  --jollof: #b8321e;
+  --ember: #e07a2f;
+  --grain: #e9d9bd;
+  --char: #16110e;
+  --panel: rgba(255, 251, 244, 0.72);
+
+  /* The colour journey. --bg is driven by scroll (with JS) or by section classes (without). */
+  --bg: var(--ivory);
+  --accent: var(--charcoal);
+
+  --serif: 'Fraunces', 'Iowan Old Style', 'Palatino Linotype', Georgia, serif;
+  --sans: 'Source Sans 3', 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+
+  --col: 65ch;
+  --gutter: clamp(1.25rem, 4vw, 3rem);
+  --topbar-h: 3.75rem;
+  /* On a phone the grain lives in a fixed stage this tall, under the top bar. Small-viewport units so the
+     strip keeps its size when the browser's address bar collapses. */
+  --stage-h: 38vh;
+  --ease-out: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --ease-soft: cubic-bezier(0.4, 0, 0.2, 1);
+
+  color-scheme: light;
+}
+
+@supports (height: 1svh) {
+  :root {
+    --stage-h: 38svh;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --ivory: #16110e;
+    --ivory-deep: #221a15;
+    --charcoal: #f1e7d8;
+    --ink: #f1e7d8;
+    --ink-soft: #c2b4a3;
+    --rule: rgba(241, 231, 216, 0.16);
+    --tomato-tint: #2d1a13;
+    --cream-glow: #2f2217;
+    --panel: rgba(22, 17, 14, 0.72);
+    --grain: #d9c6a3;
+    --bg: var(--ivory);
+    --accent: var(--charcoal);
+    color-scheme: dark;
+  }
+}
+
+/* ---------- Reset and base ---------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 1.125rem;
+  line-height: 1.6;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+  transition: background-color 0.6s linear;
+}
+img,
+picture,
+svg,
+video {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+/* A real photo renders as <picture><img>. The wrapper takes the frame's full size so the image inside
+   can be cropped by object-fit instead of overflowing. */
+picture.pic {
+  width: 100%;
+  height: 100%;
+}
+a {
+  color: inherit;
+  text-decoration-thickness: 0.06em;
+  text-underline-offset: 0.14em;
+}
+button {
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+[hidden] {
+  display: none !important;
+}
+p {
+  margin: 0 0 1em;
+  max-width: var(--col);
+}
+p:last-child {
+  margin-bottom: 0;
+}
+:focus-visible {
+  outline: 3px solid var(--ember);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+::selection {
+  background: var(--ember);
+  color: #fff;
+}
+.visually-hidden {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* ---------- Type ---------- */
+h1,
+h2,
+h3,
+.serif {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-variation-settings: 'opsz' 144;
+  letter-spacing: -0.015em;
+  line-height: 1.02;
+  margin: 0;
+  text-wrap: balance;
+}
+h2 {
+  font-size: clamp(2.5rem, 2rem + 3.6vw, 4.75rem);
+  max-width: 14ch;
+  margin-bottom: 0.3em;
+}
+h2 strong,
+h1 strong {
+  font-weight: 560;
+  color: var(--accent);
+  font-variation-settings: 'opsz' 144;
+}
+h3 {
+  font-size: clamp(1.5rem, 1.2rem + 1.2vw, 2rem);
+  font-variation-settings: 'opsz' 48;
+}
+.num {
+  font-family: var(--serif);
+  font-variant-numeric: tabular-nums;
+  font-variation-settings: 'opsz' 144;
+  font-weight: 300;
+  letter-spacing: -0.02em;
+  line-height: 0.95;
+}
+.label {
+  font-family: var(--sans);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  font-variant-caps: all-small-caps;
+  color: var(--ink-soft);
+  margin: 0 0 1.25rem;
+}
+.label b {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-variant-caps: normal;
+  letter-spacing: 0;
+  font-variant-numeric: tabular-nums;
+  margin-right: 0.35em;
+  color: var(--ink);
+}
+.lede {
+  font-size: 1.25rem;
+  line-height: 1.55;
+}
+.quiet {
+  color: var(--ink-soft);
+}
+.todo {
+  outline: 1px dashed rgba(184, 50, 30, 0.5);
+  outline-offset: 2px;
+}
+
+/* ---------- Buttons ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+  padding: 0.7em 1.25em;
+  border-radius: 999px;
+  border: 1.5px solid var(--ink);
+  background: transparent;
+  color: var(--ink);
+  font-weight: 600;
+  font-size: 1rem;
+  line-height: 1.2;
+  text-decoration: none;
+  transition: background-color 0.2s var(--ease-soft), color 0.2s var(--ease-soft), border-color 0.2s var(--ease-soft), transform 0.2s var(--ease-soft);
+}
+.btn:hover {
+  background: var(--ink);
+  color: var(--bg);
+}
+.btn-fill {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--ivory);
+}
+@media (prefers-color-scheme: dark) {
+  .btn-fill {
+    color: #16110e;
+  }
+  .stage-warm .btn-fill,
+  .stage-hot .btn-fill {
+    color: #fff;
+  }
+}
+.btn-fill:hover {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--bg);
+}
+.btn:active {
+  transform: translateY(1px);
+}
+.btn-small {
+  padding: 0.45em 0.95em;
+  font-size: 0.9375rem;
+}
+.link-arrow {
+  font-weight: 600;
+  text-decoration: none;
+  border-bottom: 1.5px solid currentColor;
+}
+
+/* ---------- Layout ---------- */
+.col {
+  max-width: var(--col);
+}
+.wrap {
+  padding-inline: var(--gutter);
+  margin-inline: auto;
+  max-width: 80rem;
+}
+.section {
+  position: relative;
+  scroll-margin-top: var(--topbar-h);
+  padding-block: clamp(4rem, 10vh, 8rem);
+  --accent: var(--charcoal);
+}
+.section > .wrap {
+  position: relative;
+}
+
+/* Narrative sections: 120vh of scroll so the grain has time, content pinned while it transforms. */
+.narrative {
+  min-height: 120vh;
+  min-height: 120svh;
+  padding-block: 0;
+  display: grid;
+}
+.narrative > .wrap {
+  min-height: 100%;
+  min-width: 0;
+}
+.narrative .pin {
+  position: sticky;
+  top: calc(var(--topbar-h) + 4vh);
+  padding-block: 8vh 6vh;
+}
+@media (min-width: 60rem) {
+  .narrative .pin {
+    top: 22vh;
+    padding-block: 0;
+    min-height: 56vh;
+  }
+  /* Content keeps to the left; the grain lives on the right. */
+  .narrative .wrap {
+    padding-right: 42vw;
+  }
+}
+@media (max-width: 59.99rem) {
+  /* On a phone nothing is pinned. The grain lives in a fixed stage under the top bar (GrainCanvas) and
+     each story beat starts its text below that stage, so the two never overlap. The gap between beats
+     is where the grain transforms. */
+  .narrative {
+    min-height: 0;
+    display: block;
+    padding-block: 2.5rem clamp(3rem, 8vh, 5rem);
+  }
+  html.js .narrative.beat {
+    padding-top: calc(var(--stage-h) + 1.5rem);
+  }
+  .narrative .pin {
+    position: static;
+    padding: 0;
+    min-height: 0;
+  }
+  /* reference material sits on solid ground on a phone; the grain shows between the story beats */
+  html.js .section:not(.narrative):not(.hero):not(.secret) {
+    background: var(--bg);
+  }
+}
+
+/* Temperature of each stage, used without JavaScript (and as the targets JS tweens between). */
+.stage-cold {
+  --stage-bg: var(--ivory);
+}
+.stage-warming {
+  --stage-bg: color-mix(in oklab, var(--ivory) 55%, var(--tomato-tint));
+}
+.stage-warm {
+  --stage-bg: var(--tomato-tint);
+  --accent: var(--jollof);
+}
+.stage-glow {
+  --stage-bg: var(--cream-glow);
+  --accent: var(--jollof);
+}
+.stage-hot {
+  --stage-bg: color-mix(in oklab, var(--tomato-tint) 70%, var(--ember));
+  --accent: var(--jollof);
+}
+.stage-cool {
+  --stage-bg: var(--ivory);
+  --accent: var(--jollof);
+}
+html:not(.js) .section {
+  background: var(--stage-bg);
+}
+html.js .section {
+  background: transparent;
+}
+
+/* Full-bleed photographs between sections. */
+.bleed {
+  position: relative;
+  width: 100%;
+  margin: 0;
+}
+.bleed img {
+  width: 100%;
+  height: clamp(18rem, 70vh, 48rem);
+  object-fit: cover;
+}
+.bleed figcaption {
+  position: absolute;
+  left: var(--gutter);
+  bottom: 1rem;
+  font-size: 0.9375rem;
+  color: #fff;
+  text-shadow: 0 1px 12px rgba(0, 0, 0, 0.5);
+  max-width: 40ch;
+}
+
+/* ---------- Stats and counters ---------- */
+.stat {
+  margin-top: 2rem;
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+.stat .num {
+  font-size: clamp(3.5rem, 3rem + 5vw, 7.5rem);
+  color: var(--accent);
+}
+.stat .cap {
+  font-size: 1.0625rem;
+  color: var(--ink-soft);
+  max-width: 18ch;
+  line-height: 1.3;
+}
+.stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(10rem, 100%), 1fr));
+  gap: 1.5rem 2rem;
+  margin-top: 2.5rem;
+  padding: 0;
+  list-style: none;
+  max-width: 44rem;
+}
+.stats .num {
+  font-size: clamp(2.5rem, 2rem + 2.5vw, 4.5rem);
+  color: var(--accent);
+}
+.stats .cap {
+  display: block;
+  font-size: 0.9375rem;
+  color: var(--ink-soft);
+  margin-top: 0.35rem;
+  line-height: 1.3;
+}
+.hint {
+  margin-top: 1.5rem;
+  font-size: 0.9375rem;
+  color: var(--ink-soft);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+}
+.hint::before {
+  content: '';
+  width: 1.4em;
+  height: 0.6em;
+  border-radius: 50%;
+  background: var(--grain);
+  border: 1px solid rgba(143, 115, 82, 0.5);
+  transform: rotate(-28deg);
+}
+html:not(.js) .hint {
+  display: none;
+}
+
+/* ---------- Scroll reveal (JS adds .js; without it everything is visible) ---------- */
+html.js .reveal {
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 0.7s var(--ease-out), transform 0.7s var(--ease-out);
+}
+html.js .reveal.in {
+  opacity: 1;
+  transform: none;
+}
+html.js .reveal:nth-child(2) {
+  transition-delay: 0.08s;
+}
+html.js .reveal:nth-child(3) {
+  transition-delay: 0.16s;
+}
+
+/* ---------- Reduced motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  html.js .reveal {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ---------- Print: only the recipe card ---------- */
+@media print {
+  body {
+    background: #fff !important;
+    color: #000;
+  }
+  body > *:not(.recipe-print-root) {
+    display: none !important;
+  }
+  .recipe-print-root {
+    display: block !important;
+  }
+}

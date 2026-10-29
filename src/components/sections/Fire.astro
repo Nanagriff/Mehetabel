@@ -1,0 +1,49 @@
+---
+import Narrative from '../Narrative.astro';
+import Pic from '../Pic.astro';
+import content from '../../content/content.json';
+const s = content.sections.fire;
+const found = content.play.recipe.ingredients.find((i) => i.hidingPlace === 'fire');
+---
+<Narrative id="fire" s={s} stage="warming" keyIndex={4} class="fire">
+  <div class="heat reveal" data-heat-zone slot="after">
+    <label class="heat-label" for="heat-range">Raise the heat</label>
+    <input id="heat-range" class="heat-range" type="range" min="0" max="100" value="0" step="1" data-heat aria-describedby="heat-status" />
+    <p id="heat-status" class="quiet heat-status" data-heat-status aria-live="polite">Cold pan.</p>
+    {found && (
+      <button class="btn btn-small find-reveal" type="button" data-find={found.id} data-find-fire hidden>
+        Something in the embers. Take it.
+      </button>
+    )}
+  </div>
+</Narrative>
+<figure class="bleed">
+  <Pic src={s.photo.src} alt={s.photo.alt} width={s.photo.width} height={s.photo.height} sizes="100vw" />
+</figure>
+
+<style>
+  .heat {
+    margin-top: 1.5rem;
+    max-width: 24rem;
+  }
+  html:not(.js) .heat {
+    display: none;
+  }
+  .heat-label {
+    display: block;
+    font-size: 0.9375rem;
+    color: var(--ink-soft);
+    margin-bottom: 0.35rem;
+  }
+  .heat-range {
+    width: 100%;
+    accent-color: var(--ember);
+  }
+  .heat-status {
+    font-size: 0.9375rem;
+    margin-top: 0.35rem;
+  }
+  .find-reveal {
+    margin-top: 0.75rem;
+  }
+</style>

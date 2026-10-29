@@ -1,0 +1,217 @@
+---
+import Narrative from '../Narrative.astro';
+import Pic from '../Pic.astro';
+import content from '../../content/content.json';
+import { fmt } from '../../utils/markup.js';
+const s = content.sections.story;
+const { case: c, channels } = content.story;
+const todo = (t) => (/\[TODO/.test(t ?? '') ? 'todo' : '');
+---
+<Narrative id="story" s={s} stage="warm" keyIndex={9} hideStat>
+  <p class={`degree quiet reveal ${todo(s.degree)}`}>{s.degree}</p>
+  <ul class="stats reveal">
+    {channels.map((ch) => (
+      <li>
+        <span class="num" data-count={ch.value} data-suffix={ch.suffix ?? ''}>{fmt(ch.value)}{ch.suffix ?? ''}</span>
+        <span class="cap">{ch.label}</span>
+      </li>
+    ))}
+  </ul>
+</Narrative>
+<section class="section case stage-warm" aria-labelledby="case-h">
+  <div class="wrap case-grid">
+    <div class="case-text">
+      <h3 id="case-h" class={todo(c.title)}>{c.title}</h3>
+      <p class={todo(c.summary)}>{c.summary}</p>
+      <table class="metrics">
+        <caption class="visually-hidden">Before and after the launch</caption>
+        <thead>
+          <tr><th scope="col"></th><th scope="col">Before</th><th scope="col">After</th></tr>
+        </thead>
+        <tbody>
+          {c.metrics.map((m) => (
+            <tr>
+              <th scope="row">{m.label}</th>
+              <td class="num">{m.before}</td>
+              <td class="num after">{m.after}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+    <div class="compare" data-compare style="--pos: 50%">
+      <div class="compare-frame">
+        <figure class="compare-img before">
+          <Pic src={c.before.src} alt={c.before.alt} width={c.before.width} height={c.before.height} sizes="(min-width: 60rem) 50vw, 100vw" />
+          <figcaption>{c.before.label}</figcaption>
+        </figure>
+        <figure class="compare-img after">
+          <Pic src={c.after.src} alt={c.after.alt} width={c.after.width} height={c.after.height} sizes="(min-width: 60rem) 50vw, 100vw" />
+          <figcaption>{c.after.label}</figcaption>
+        </figure>
+        <div class="compare-handle" aria-hidden="true"><span></span></div>
+        <input class="compare-range" type="range" min="0" max="100" value="50" aria-label="Drag to compare before and after" data-compare-range />
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .degree {
+    margin-top: -0.25rem;
+    font-size: 1rem;
+  }
+  .case {
+    padding-top: 0;
+  }
+  .case-grid {
+    display: grid;
+    gap: 2.5rem;
+    grid-template-columns: minmax(0, 1fr);
+  }
+  @media (min-width: 60rem) {
+    .case-grid {
+      grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+      align-items: center;
+    }
+  }
+  .metrics {
+    border-collapse: collapse;
+    margin-top: 1.5rem;
+    width: 100%;
+    max-width: 28rem;
+    font-size: 1rem;
+  }
+  .metrics th,
+  .metrics td {
+    text-align: left;
+    padding: 0.55rem 0.75rem 0.55rem 0;
+    border-bottom: 1px solid var(--rule);
+    vertical-align: baseline;
+  }
+  .metrics thead th {
+    font-size: 0.8125rem;
+    color: var(--ink-soft);
+    font-variant-caps: all-small-caps;
+    letter-spacing: 0.06em;
+  }
+  .metrics tbody th {
+    font-weight: 500;
+  }
+  .metrics .num {
+    font-size: 1.5rem;
+    font-weight: 300;
+  }
+  .metrics .after {
+    color: var(--accent);
+    font-weight: 500;
+  }
+  .compare-frame {
+    position: relative;
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+    border-radius: 0.5rem;
+    background: var(--ivory-deep);
+    user-select: none;
+  }
+  .compare-img {
+    position: absolute;
+    inset: 0;
+    margin: 0;
+  }
+  .compare-img :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .compare-img figcaption {
+    position: absolute;
+    bottom: 0.75rem;
+    padding: 0.25em 0.7em;
+    border-radius: 999px;
+    background: rgba(31, 27, 24, 0.7);
+    color: #fff;
+    font-size: 0.875rem;
+    font-weight: 600;
+  }
+  .before figcaption {
+    left: 0.75rem;
+  }
+  .after figcaption {
+    right: 0.75rem;
+  }
+  html.js .after {
+    clip-path: inset(0 0 0 var(--pos));
+  }
+  html:not(.js) .compare-frame {
+    aspect-ratio: auto;
+    display: grid;
+    gap: 1rem;
+  }
+  html:not(.js) .compare-img {
+    position: relative;
+  }
+  html:not(.js) .compare-handle,
+  html:not(.js) .compare-range {
+    display: none;
+  }
+  .compare-handle {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: var(--pos);
+    width: 2px;
+    background: #fff;
+    transform: translateX(-1px);
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.15);
+  }
+  .compare-handle span {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    background: #fff;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
+  }
+  .compare-handle span::before,
+  .compare-handle span::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    width: 0.5rem;
+    height: 0.5rem;
+    border-top: 2px solid var(--charcoal);
+    border-left: 2px solid var(--charcoal);
+  }
+  .compare-handle span::before {
+    left: 0.6rem;
+    transform: translateY(-50%) rotate(-45deg);
+  }
+  .compare-handle span::after {
+    right: 0.6rem;
+    transform: translateY(-50%) rotate(135deg);
+  }
+  .compare-range {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    opacity: 0;
+    cursor: ew-resize;
+  }
+  .compare-range:focus-visible + .compare-handle,
+  .compare-frame:has(.compare-range:focus-visible) .compare-handle span {
+    outline: 3px solid var(--ember);
+    outline-offset: 3px;
+  }
+  @media (prefers-color-scheme: dark) {
+    .compare-handle span::before,
+    .compare-handle span::after {
+      border-color: #1f1b18;
+    }
+  }
+</style>

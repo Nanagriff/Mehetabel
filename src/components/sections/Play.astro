@@ -1,0 +1,380 @@
+---
+import Narrative from '../Narrative.astro';
+import content from '../../content/content.json';
+const s = content.sections.play;
+const { game, recipe } = content.play;
+const owner = content.owner;
+const steps = [
+  ['oil', 'Oil'],
+  ['onions', 'Onions'],
+  ['pepper', 'Pepper base'],
+  ['stock', 'Stock'],
+  ['rice', 'Rice'],
+  ['cover', 'Cover'],
+];
+---
+<Narrative id="play" s={s} stage="cool" keyIndex={13} />
+<section class="section play-section stage-cool" aria-label="Jollof timer and the hidden recipe">
+  <div class="wrap play-grid">
+    <div class="game" data-game data-steps={steps.map((x) => x[0]).join(' ')}>
+      <h3>{game.title}</h3>
+      <p>{game.intro}</p>
+      <div class="rules" data-game-rules>
+        <ol>
+          {game.rules.map((r) => <li>{r}</li>)}
+        </ol>
+        <div class="row">
+          <button class="btn btn-fill" type="button" data-game-start>{game.startLabel}</button>
+          <button class="btn" type="button" data-game-notnow>{game.notNowLabel}</button>
+        </div>
+      </div>
+      <p class="quiet nojs-only">Turn on JavaScript to play.</p>
+
+      <div class="board" data-game-board hidden>
+        <div class="board-top">
+          <p class="clock"><span class="num" data-game-clock>90</span><span class="quiet"> s left</span></p>
+          <p class="phase quiet" data-game-phase aria-live="polite">Cold pan. Start with the oil.</p>
+        </div>
+        <div class="pot-wrap" aria-hidden="true">
+          <svg class="pot" viewBox="0 0 200 140">
+            <defs>
+              <clipPath id="potclip"><rect x="26" y="52" width="148" height="70" rx="8" /></clipPath>
+            </defs>
+            <g class="flames" data-game-flames>
+              <path d="M70 134 q6 -18 12 0 q4 -10 8 0 z" />
+              <path d="M96 136 q6 -22 12 0 q4 -10 8 0 z" />
+              <path d="M122 134 q6 -18 12 0 q4 -10 8 0 z" />
+            </g>
+            <rect x="26" y="52" width="148" height="70" rx="8" fill="#3a2e28" />
+            <rect class="contents" data-game-contents x="26" y="52" width="148" height="70" clip-path="url(#potclip)" fill="#e6d5b8" />
+            <rect class="smoke-floor" data-game-floor x="26" y="112" width="148" height="10" clip-path="url(#potclip)" fill="#3b1a0c" opacity="0" />
+            <rect class="lid" data-game-lid x="18" y="40" width="164" height="14" rx="7" fill="#5a4a42" opacity="0" />
+            <rect x="14" y="76" width="12" height="6" rx="3" fill="#5a4a42" />
+            <rect x="174" y="76" width="12" height="6" rx="3" fill="#5a4a42" />
+          </svg>
+        </div>
+        <div class="heat-ctrl">
+          <label for="game-heat">Heat <span class="quiet" data-game-heat-label>(medium)</span></label>
+          <div class="heat-track">
+            <input id="game-heat" type="range" min="0" max="100" value="45" step="1" data-game-heat aria-describedby="heat-band-note" />
+            <div class="band" data-game-band aria-hidden="true"></div>
+          </div>
+          <p id="heat-band-note" class="quiet small">Keep the handle inside the shaded band. Arrow keys work too.</p>
+        </div>
+        <div class="steps" role="group" aria-label="Add ingredients in order">
+          {steps.map(([id, label]) => (
+            <button class="btn btn-small step" type="button" data-game-step={id}>{label}</button>
+          ))}
+        </div>
+        <div class="row">
+          <button class="btn" type="button" data-game-lift disabled>{game.liftLabel}</button>
+        </div>
+        <p class="quiet small" data-game-log aria-live="polite"></p>
+      </div>
+
+      <div class="result" data-game-result hidden aria-live="polite">
+        <p class="label"><b>Score</b>out of 100</p>
+        <p class="score num" data-game-score>0</p>
+        <p class="verdict" data-game-verdict></p>
+        <ul class="breakdown" data-game-breakdown></ul>
+        <button class="btn btn-fill" type="button" data-game-again>{game.playAgainLabel}</button>
+      </div>
+    </div>
+
+    <div class="recipe" data-recipe>
+      <h3 class={/\[TODO/.test(recipe.title) ? 'todo' : ''}>{recipe.title}</h3>
+      <p>{recipe.intro}</p>
+      <p class="quiet nojs-only">Turn on JavaScript to hunt for the ingredients.</p>
+      <p class="found-line"><span class="num" data-recipe-count>0</span> of {recipe.ingredients.length} {recipe.foundLabel}</p>
+      <ol class="slots">
+        {recipe.ingredients.map((ing) => (
+          <li class="slot" data-recipe-slot={ing.id}>
+            <span class="slot-grain" aria-hidden="true"></span>
+            <span class="slot-text">
+              <span class="slot-label">{ing.label}</span>
+              <span class="slot-hint quiet">{ing.hint}</span>
+            </span>
+          </li>
+        ))}
+      </ol>
+      <div class="row">
+        <button class="btn btn-fill" type="button" data-recipe-print disabled>{recipe.unlockLabel}</button>
+        <button class="btn btn-small" type="button" data-recipe-reset hidden>Hide them again</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="recipe-print-root" data-recipe-card hidden>
+  <article class="recipe-card">
+    <p class="card-eyebrow">A recipe from this page</p>
+    <h2 class="recipe-card-title">{recipe.title}</h2>
+    <h3>Ingredients</h3>
+    <ul>
+      {recipe.ingredients.map((ing) => <li>{ing.label}</li>)}
+    </ul>
+    <h3>Method</h3>
+    <ol>
+      {recipe.method.map((m) => <li>{m}</li>)}
+    </ol>
+    <p class="signoff">{recipe.signoff}</p>
+    <p class="site-line">{content.site.url.replace(/^https?:\/\//, '')}</p>
+    <button class="btn btn-small no-print" type="button" data-recipe-close>Close</button>
+  </article>
+</div>
+
+<style>
+  .play-section {
+    padding-top: 0;
+  }
+  .play-grid {
+    display: grid;
+    gap: 2.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr));
+    align-items: start;
+  }
+  .game,
+  .recipe {
+    padding-top: 1rem;
+    border-top: 2px solid var(--ink);
+  }
+  .game h3,
+  .recipe h3 {
+    margin-bottom: 0.75rem;
+  }
+  .nojs-only {
+    display: none;
+  }
+  html:not(.js) .nojs-only {
+    display: block;
+  }
+  html:not(.js) .rules .row,
+  html:not(.js) .found-line,
+  html:not(.js) .recipe .row {
+    display: none;
+  }
+  .row {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    margin-top: 1rem;
+  }
+  .small {
+    font-size: 0.9375rem;
+  }
+  .rules ol {
+    padding-left: 1.25rem;
+    margin: 0 0 0.5rem;
+    font-size: 1.0625rem;
+  }
+  .rules li {
+    margin-bottom: 0.4em;
+  }
+  .board {
+    display: grid;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+  .board-top {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .clock .num {
+    font-size: 2.5rem;
+  }
+  .phase {
+    margin: 0;
+    font-size: 1rem;
+  }
+  .pot-wrap {
+    max-width: 22rem;
+  }
+  .flames path {
+    fill: var(--ember);
+    opacity: 0.3;
+    transform-origin: 50% 100%;
+    transition: opacity 0.3s, transform 0.3s;
+  }
+  .heat-ctrl label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 0.35rem;
+  }
+  .heat-track {
+    position: relative;
+  }
+  .heat-track input {
+    width: 100%;
+    accent-color: var(--jollof);
+    position: relative;
+    z-index: 1;
+  }
+  .band {
+    position: absolute;
+    top: 50%;
+    height: 0.9rem;
+    transform: translateY(-50%);
+    left: 45%;
+    width: 25%;
+    background: rgba(224, 122, 47, 0.3);
+    border-radius: 999px;
+    pointer-events: none;
+    transition: left 0.3s, width 0.3s;
+  }
+  .steps {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  .step[data-done] {
+    background: var(--ink);
+    color: var(--bg);
+  }
+  .step[data-next] {
+    border-color: var(--jollof);
+    box-shadow: 0 0 0 3px rgba(184, 50, 30, 0.2);
+  }
+  .result .score {
+    font-size: 5rem;
+    color: var(--jollof);
+    margin: 0;
+  }
+  .verdict {
+    font-family: var(--serif);
+    font-size: 1.5rem;
+    margin: 0.5rem 0 1rem;
+  }
+  .breakdown {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1rem;
+    display: grid;
+    gap: 0.25rem;
+    font-size: 1rem;
+  }
+  .found-line {
+    font-size: 1.125rem;
+  }
+  .found-line .num {
+    font-size: 2rem;
+    color: var(--jollof);
+  }
+  .slots {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 0.6rem;
+  }
+  .slot {
+    display: grid;
+    grid-template-columns: 1.5rem 1fr;
+    gap: 0.75rem;
+    align-items: start;
+    font-size: 1.0625rem;
+  }
+  .slot-grain {
+    width: 1.4em;
+    height: 0.6em;
+    margin-top: 0.5em;
+    border-radius: 50%;
+    background: transparent;
+    border: 1.5px dashed rgba(143, 115, 82, 0.6);
+    transform: rotate(-28deg);
+  }
+  .slot.found .slot-grain {
+    background: var(--jollof);
+    border: 1px solid var(--jollof);
+  }
+  .slot-text {
+    display: grid;
+  }
+  html.js .slot:not(.found) .slot-label {
+    display: none;
+  }
+  html.js .slot.found .slot-hint {
+    display: none;
+  }
+  html:not(.js) .slot-hint {
+    display: none;
+  }
+  .slot-hint {
+    font-size: 0.9375rem;
+  }
+
+  /* The printable card */
+  .recipe-print-root {
+    position: fixed;
+    inset: 0;
+    z-index: 50;
+    background: rgba(31, 27, 24, 0.55);
+    display: grid;
+    place-items: center;
+    padding: 1rem;
+    overflow: auto;
+  }
+  .recipe-print-root[hidden] {
+    display: none;
+  }
+  .recipe-card {
+    background: #fffdf8;
+    color: #1f1b18;
+    max-width: 36rem;
+    width: 100%;
+    padding: 2.5rem 2.5rem 2rem;
+    border: 1px solid #d9c6a3;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    font-size: 1.0625rem;
+  }
+  .card-eyebrow {
+    font-size: 0.8125rem;
+    letter-spacing: 0.08em;
+    font-variant-caps: all-small-caps;
+    color: #5a5048;
+    margin-bottom: 0.5rem;
+  }
+  .recipe-card-title {
+    font-size: 2.5rem;
+    color: #b8321e;
+    margin-bottom: 1.25rem;
+  }
+  .recipe-card h3 {
+    font-size: 1.125rem;
+    margin: 1.25rem 0 0.5rem;
+  }
+  .recipe-card ul,
+  .recipe-card ol {
+    padding-left: 1.25rem;
+    margin: 0;
+  }
+  .recipe-card li {
+    margin-bottom: 0.35em;
+  }
+  .signoff {
+    font-family: var(--serif);
+    font-style: italic;
+    margin-top: 1.5rem;
+  }
+  .site-line {
+    font-size: 0.875rem;
+    color: #5a5048;
+  }
+  @media print {
+    .recipe-print-root {
+      position: static;
+      background: none;
+      padding: 0;
+    }
+    .recipe-card {
+      box-shadow: none;
+      border: 0;
+      max-width: none;
+    }
+    .no-print {
+      display: none;
+    }
+  }
+</style>

@@ -1,0 +1,28 @@
+# Contabo (mauplus-prod): nginx serving dist/ behind Coolify's Traefik.
+# Deploy: npm run build && ./deploy/push.sh
+services:
+  web:
+    image: nginx:1.27-alpine
+    container_name: mehetabel
+    restart: unless-stopped
+    volumes:
+      - ./dist:/usr/share/nginx/html:ro
+      - ./nginx.container.conf:/etc/nginx/conf.d/default.conf:ro
+    networks:
+      - coolify
+    labels:
+      traefik.enable: "true"
+      traefik.docker.network: coolify
+      traefik.http.middlewares.redirect-to-https.redirectscheme.scheme: https
+      traefik.http.routers.mehetabel-http.entryPoints: http
+      traefik.http.routers.mehetabel-http.rule: Host(`mehetabel.169.58.62.79.sslip.io`)
+      traefik.http.routers.mehetabel-http.middlewares: redirect-to-https
+      traefik.http.routers.mehetabel-https.entryPoints: https
+      traefik.http.routers.mehetabel-https.rule: Host(`mehetabel.169.58.62.79.sslip.io`)
+      traefik.http.routers.mehetabel-https.tls: "true"
+      traefik.http.routers.mehetabel-https.tls.certresolver: letsencrypt
+      traefik.http.services.mehetabel.loadbalancer.server.port: "80"
+
+networks:
+  coolify:
+    external: true

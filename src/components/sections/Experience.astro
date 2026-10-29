@@ -1,0 +1,176 @@
+---
+import Narrative from '../Narrative.astro';
+import content from '../../content/content.json';
+const s = content.sections.experience;
+const { roles, education, certificates } = content.experience;
+const todo = (t) => (/\[TODO/.test(t ?? '') ? 'todo' : '');
+const n = s.initiallyVisible ?? 3;
+---
+<Narrative id="experience" s={s} stage="cool" keyIndex={12} />
+<section class="section record stage-cool" aria-label="Roles, education and certificates">
+  <div class="wrap record-grid">
+    <div>
+      <h3 class="record-title">Roles</h3>
+      <ol class="timeline" data-timeline>
+        {roles.map((r, i) => (
+          <li class={i >= n ? 'more' : ''}>
+            <span class="when num">{r.start}–{r.end}</span>
+            <div>
+              <p class={`what ${todo(r.title)}`}><strong>{r.title}</strong>, {r.org}, {r.place}</p>
+              <p class={`quiet ${todo(r.note)}`}>{r.note}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
+      {roles.length > n && (
+        <button class="btn btn-small" type="button" data-timeline-toggle aria-expanded="false" data-more={s.showAllLabel} data-less={s.showLessLabel}>
+          {s.showAllLabel}
+        </button>
+      )}
+      <h3 class="record-title">Education</h3>
+      <ol class="timeline">
+        {education.map((r) => (
+          <li>
+            <span class="when num">{r.start}–{r.end}</span>
+            <div>
+              <p class={`what ${todo(r.title)}`}><strong>{r.title}</strong>, {r.org}</p>
+              <p class={`quiet ${todo(r.note)}`}>{r.note}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
+    </div>
+    <div>
+      <h3 class="record-title">Certificates</h3>
+      <ul class="certs">
+        {certificates.map((c, i) => (
+          <li>
+            <button class="flip" type="button" aria-pressed="false" aria-describedby={`cert-back-${i}`}>
+              <span class="face front">
+                <span class={`cert-title ${todo(c.title)}`}>{c.title}</span>
+                <span class="quiet">{c.issuer} · {c.year}</span>
+                <span class="flip-hint quiet">Turn over</span>
+              </span>
+              <span class="face back" id={`cert-back-${i}`}>
+                <span class={todo(c.covers)}>{c.covers}</span>
+              </span>
+            </button>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </div>
+</section>
+
+<style>
+  .record {
+    padding-top: 0;
+  }
+  .record-grid {
+    display: grid;
+    gap: 2.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr));
+  }
+  .record-title {
+    font-size: 1.25rem;
+    margin: 0 0 1rem;
+    padding-top: 1rem;
+    border-top: 2px solid var(--ink);
+  }
+  .record-title + .timeline + .btn {
+    margin-bottom: 2rem;
+  }
+  .timeline {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1.25rem;
+    display: grid;
+    gap: 1rem;
+  }
+  .timeline li {
+    display: grid;
+    grid-template-columns: 6.5rem 1fr;
+    gap: 1rem;
+    align-items: baseline;
+    font-size: 1.0625rem;
+  }
+  .timeline .when {
+    font-size: 1.0625rem;
+    color: var(--ink-soft);
+    font-weight: 400;
+    white-space: nowrap;
+  }
+  .timeline p {
+    margin: 0;
+  }
+  .timeline .quiet {
+    font-size: 1rem;
+  }
+  html.js .timeline:not(.show-all) .more {
+    display: none;
+  }
+  html:not(.js) [data-timeline-toggle] {
+    display: none;
+  }
+  .certs {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 1rem;
+  }
+  .flip {
+    position: relative;
+    width: 100%;
+    text-align: left;
+    background: none;
+    border: 0;
+    padding: 0;
+    min-height: 7rem;
+    perspective: 1200px;
+  }
+  .face {
+    display: grid;
+    gap: 0.25rem;
+    padding: 1rem 1.25rem;
+    border-radius: 0.75rem;
+    border: 1px solid var(--rule);
+    background: var(--panel);
+    font-size: 1rem;
+    backface-visibility: hidden;
+    transition: transform 0.6s var(--ease-out);
+    min-height: 7rem;
+  }
+  .cert-title {
+    font-weight: 600;
+    font-size: 1.0625rem;
+  }
+  .flip-hint {
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+  }
+  html.js .face.back {
+    position: absolute;
+    inset: 0;
+    transform: rotateY(180deg);
+    background: var(--jollof);
+    color: #fff;
+    border-color: var(--jollof);
+    align-content: center;
+  }
+  html.js .flip[aria-pressed='true'] .front {
+    transform: rotateY(180deg);
+  }
+  html.js .flip[aria-pressed='true'] .back {
+    transform: rotateY(0);
+  }
+  html:not(.js) .face.back {
+    border-top: 0;
+    border-radius: 0 0 0.75rem 0.75rem;
+    margin-top: -0.75rem;
+    min-height: 0;
+  }
+  html:not(.js) .flip-hint {
+    display: none;
+  }
+</style>

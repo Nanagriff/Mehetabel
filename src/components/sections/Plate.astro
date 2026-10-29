@@ -1,0 +1,96 @@
+---
+import Narrative from '../Narrative.astro';
+import Pic from '../Pic.astro';
+import content from '../../content/content.json';
+const s = content.sections.plate;
+const gallery = content.gallery;
+const found = content.play.recipe.ingredients.find((i) => i.hidingPlace === 'photo');
+---
+<Narrative id="plate" s={s} stage="hot" keyIndex={7} />
+<section class="section gallery-section stage-hot" aria-label="Plated dishes">
+  <div class="wrap">
+    <ul class="gallery">
+      {
+        gallery.map((g, i) => (
+          <li class="reveal">
+            <figure class={`plate ${g.hidesIngredient ? 'has-secret' : ''}`}>
+              <div class="plate-img">
+                <Pic src={g.src} alt={g.alt} width={g.width} height={g.height} focus={g.focus} sizes="(min-width: 60rem) 30vw, 50vw" />
+                {g.hidesIngredient && found && (
+                  <div class="plate-back" aria-hidden="true">
+                    <span>Under the plate</span>
+                  </div>
+                )}
+              </div>
+              <figcaption class={/\[TODO/.test(g.caption) ? 'todo' : ''}>{g.caption}</figcaption>
+              {g.hidesIngredient && found && (
+                <button class="btn btn-small plate-turn" type="button" data-find={found.id} data-plate-turn aria-pressed="false">
+                  Turn the plate
+                </button>
+              )}
+            </figure>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>
+
+<style>
+  .gallery-section {
+    padding-top: 0;
+  }
+  .gallery {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 16rem), 1fr));
+    gap: 1.5rem;
+  }
+  .plate {
+    margin: 0;
+  }
+  .plate-img {
+    position: relative;
+    border-radius: 50%;
+    overflow: hidden;
+    aspect-ratio: 1;
+    background: var(--ivory-deep);
+    transform-style: preserve-3d;
+    transition: transform 0.7s var(--ease-out);
+  }
+  .plate-img :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    backface-visibility: hidden;
+  }
+  .plate-back {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    background: var(--jollof);
+    color: var(--ivory);
+    font-family: var(--serif);
+    font-size: 1.25rem;
+    transform: rotateY(180deg);
+    backface-visibility: hidden;
+  }
+  .plate.turned .plate-img {
+    transform: rotateY(180deg);
+  }
+  html:not(.js) .plate-back,
+  html:not(.js) .plate-turn {
+    display: none;
+  }
+  figcaption {
+    margin-top: 0.75rem;
+    font-size: 1rem;
+    color: var(--ink-soft);
+  }
+  .plate-turn {
+    margin-top: 0.5rem;
+  }
+</style>

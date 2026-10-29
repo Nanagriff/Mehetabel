@@ -1,0 +1,101 @@
+---
+import Narrative from '../Narrative.astro';
+import content from '../../content/content.json';
+const s = content.sections.skills;
+const { kitchen, studio } = content.skills;
+const found = content.play.recipe.ingredients.find((i) => i.hidingPlace === 'skill');
+const shelves = [
+  ['kitchen', s.shelves.kitchen, kitchen],
+  ['studio', s.shelves.studio, studio],
+];
+---
+<Narrative id="skills" s={s} stage="cool" keyIndex={11} />
+<section class="section shelves-section stage-cool" aria-label="Skills by shelf">
+  <div class="wrap">
+    <div class="shelves" data-shelves>
+      {
+        shelves.map(([key, title, items]) => (
+          <div class="shelf">
+            <h3 class="shelf-title">{title}</h3>
+            <ul class="chips">
+              {items.map((sk) => (
+                <li>
+                  <button class="chip" type="button" data-skill={sk.id} aria-pressed="false">
+                    {sk.label}
+                  </button>
+                  {sk.hidesIngredient && found && (
+                    <button class="btn btn-small chip-secret" type="button" data-find={found.id} data-skill-secret={sk.id} hidden>
+                      Something fell off the shelf. Pick it up.
+                    </button>
+                  )}
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))
+      }
+      <p class="quiet skills-status" data-skills-status aria-live="polite"></p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .shelves-section {
+    padding-top: 0;
+  }
+  .shelves {
+    display: grid;
+    gap: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr));
+    max-width: 60rem;
+  }
+  .shelf {
+    padding-top: 1rem;
+    border-top: 2px solid var(--ink);
+  }
+  .shelf-title {
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+  }
+  .chips {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  .chips li {
+    display: contents;
+  }
+  .chip {
+    padding: 0.45em 0.9em;
+    border-radius: 999px;
+    border: 1.5px solid var(--rule);
+    background: var(--panel);
+    font-size: 1rem;
+    transition: border-color 0.2s, background-color 0.2s, color 0.2s;
+  }
+  .chip:hover {
+    border-color: var(--ink);
+  }
+  .chip[aria-pressed='true'] {
+    background: var(--jollof);
+    border-color: var(--jollof);
+    color: #fff;
+  }
+  html:not(.js) .chip {
+    pointer-events: none;
+  }
+  .chip-secret {
+    flex-basis: 100%;
+    justify-self: start;
+    width: max-content;
+  }
+  .skills-status {
+    grid-column: 1 / -1;
+    font-size: 1rem;
+    min-height: 1.6em;
+    margin: 0;
+  }
+</style>

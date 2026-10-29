@@ -1,0 +1,749 @@
+{
+  "_readme": "Every word, number and image on the site comes from this file. Anything containing [TODO] is a placeholder that must be replaced before launch. Headlines use **double asterisks** around the key phrase that should be bold. Image paths starting with /placeholders/ are labelled warm-grey stand-ins; real photos go in src/photos/ and are referenced as photos/filename.jpg. DRAFT NOTE: names of restaurants, employers, schools, dates and figures below are invented to show the voice and shape of the finished site. Swap each one for the real thing with Mehetabel before launch. An image may also carry a \"focus\" such as \"50% 70%\": the point to keep in view when the picture is cropped to fit its frame. projects[].link {href,label} adds a button to a card; owner.brands lists her own brands, linked from the contact section.",
+  "site": {
+    "url": "https://mehetabel.169.58.62.79.sslip.io",
+    "urlNote": "[TODO] Replace with the real domain before building. The sitemap and share links use it.",
+    "title": "Mehetabel Gyebi Aquinas, chef",
+    "description": "Mehetabel Gyebi Aquinas is a chef in Accra who cooks West African food with a modern hand, runs the kitchen, and then tells the world about what came out of it.",
+    "lang": "en",
+    "ogImage": "/og.jpg",
+    "builtByHand": true
+  },
+  "owner": {
+    "name": "Mehetabel Gyebi Aquinas",
+    "firstName": "Mehetabel",
+    "businessName": "Mehetabel",
+    "useBusinessName": false,
+    "city": "Accra",
+    "role": "Chef, and the person who tells the world about the food",
+    "email": "hello@mehetabel.com",
+    "instagram": "https://instagram.com/chefmehetabel",
+    "instagramHandle": "@chefmehetabel",
+    "linkedin": "https://www.linkedin.com/in/mehetabel-gyebi-aquinas",
+    "cv": "/cv/mehetabel-gyebi-aquinas-cv.pdf",
+    "cvLabel": "Download my CV",
+    "sound": false,
+    "brands": [
+      {
+        "name": "Dzidzɔ Ze",
+        "url": "https://dzidzoze.vercel.app/",
+        "note": "my food brand"
+      }
+    ]
+  },
+  "nav": {
+    "links": [
+      {
+        "label": "Work",
+        "href": "#work"
+      },
+      {
+        "label": "Skills",
+        "href": "#skills"
+      },
+      {
+        "label": "Contact",
+        "href": "#contact"
+      }
+    ],
+    "cvLabel": "CV",
+    "contactLabel": "Get in touch"
+  },
+  "hero": {
+    "number": "00",
+    "label": "Hello",
+    "lines": [
+      "Hello, I'm Mehetabel.",
+      "I'm a chef.",
+      "I also make sure the world hears about the food."
+    ],
+    "sub": "West African cooking with a modern hand, from a kitchen in Accra, and my own food brand, Dzidzɔ Ze, in Kumasi. Open to head chef roles, private tables, and brands that want their food to say something.",
+    "portrait": {
+      "src": "photos/mehetabel-portrait.jpg",
+      "alt": "Mehetabel in her apron, hands on her hips, smiling at the camera",
+      "width": 720,
+      "height": 1080
+    },
+    "scrollPrompt": "Scroll to pick up a grain",
+    "skipLabel": "Skip to my work",
+    "pressKey": "Press any key to skip"
+  },
+  "sections": {
+    "oneGrain": {
+      "number": "01",
+      "label": "One grain",
+      "headline": "It starts with **one grain**.",
+      "body": "My grandmother's kitchen in Koforidua, age nine. One blackened pot, one wooden spoon worn flat on one side, and a rule: you do not lift the lid until she says so.",
+      "stat": {
+        "value": 1,
+        "suffix": "",
+        "caption": "pot, one spoon, one kitchen"
+      },
+      "interactionHint": "Drag to turn the grain"
+    },
+    "manyGrains": {
+      "number": "02",
+      "label": "Many grains",
+      "headline": "One grain is nothing. **A thousand is a meal.**",
+      "body": "A Saturday night in a full dining room is four hundred and twenty plates, each one leaving the pass the way the first one did. Scale is not louder cooking. It is the same care, repeated until nobody can tell which plate was number one.",
+      "stat": {
+        "value": 420,
+        "suffix": "",
+        "caption": "covers on a Saturday night"
+      },
+      "stats": [
+        {
+          "value": 420,
+          "suffix": "",
+          "caption": "covers on a Saturday"
+        },
+        {
+          "value": 38,
+          "suffix": "",
+          "caption": "plates a service, on average"
+        },
+        {
+          "value": 12000,
+          "suffix": "+",
+          "caption": "people fed last year"
+        }
+      ],
+      "interactionHint": "The grains settle into the number"
+    },
+    "ingredients": {
+      "number": "03",
+      "label": "The ingredients",
+      "headline": "Rice is **only the beginning**.",
+      "body": "Everything else in the pot is a decision. The tomato is where I shop, the onion is how long I am willing to wait, the pepper is who I am cooking for. Read them and you have read how I work.",
+      "interactionHint": "Tap an ingredient to read what it stands for"
+    },
+    "fire": {
+      "number": "04",
+      "label": "The fire",
+      "headline": "Technique is what **the fire reveals**.",
+      "body": "Nine years at the stove, from scrubbing cassava in a chop bar to running the pass in a sixty-seat dining room. Fire does not care about your plans. It taught me to cut faster, taste sooner, and say sorry to a pot only once.",
+      "stat": {
+        "value": 9,
+        "suffix": "",
+        "caption": "years at the stove"
+      },
+      "photo": {
+        "src": "photos/mehetabel-laughing.jpg",
+        "alt": "Mehetabel in her apron, laughing, caught mid-service",
+        "width": 1080,
+        "height": 719
+      },
+      "interactionHint": "Hover or touch to raise the heat"
+    },
+    "secret": {
+      "number": "05",
+      "label": "The secret ingredient",
+      "headline": "Everyone asks. **It's love.**",
+      "handwriting": "/handwriting/love.svg",
+      "handwritingAlt": "The word love, in Mehetabel's handwriting",
+      "paragraph": "I cook because the kitchen is the one place where I know exactly what to do with my hands. I cook for the person who had a long day and did not expect to be looked after. I cook for my grandmother, who is not here to taste it, and for the table of strangers who will become friends by the second course. When the plate lands I want you to go quiet for a moment, the way people do when something is true. Then I want you to look up, find whoever you came with, and push the plate toward them so they can try it too. That is the whole job."
+    },
+    "pot": {
+      "number": "06",
+      "label": "The pot",
+      "headline": "Then **you wait**.",
+      "body": "The smoky layer at the bottom of the pot cannot be rushed and cannot be faked. Neither can a kitchen. The largest brigade I have led was fourteen cooks, and I ask three things of every one of them: taste everything, call it when you are behind, and leave the station cleaner than the person before you.",
+      "stat": {
+        "value": 14,
+        "suffix": "",
+        "caption": "cooks in the largest brigade she has led"
+      },
+      "photo": {
+        "src": "photos/mehetabel-smiling.jpg",
+        "alt": "Mehetabel in her apron, smiling, one hand on her hip",
+        "width": 1080,
+        "height": 719
+      },
+      "interactionHint": "Scrub the timeline to watch the colour spread",
+      "scrubLabels": [
+        "Raw",
+        "Steaming",
+        "Turning",
+        "Ready"
+      ]
+    },
+    "plate": {
+      "number": "07",
+      "label": "The plate",
+      "headline": "Eaten with **the eyes first**.",
+      "body": "A plate is read before it is tasted. Where the colour sits, how much white space is left, which way the chicken faces: all of it is a sentence, and I want mine to be short and clear.",
+      "interactionHint": "Her plates, from above"
+    },
+    "table": {
+      "number": "08",
+      "label": "The table",
+      "headline": "Food is only finished **when it's shared**.",
+      "body": "Forty-eight events this year, from a dinner for eight on a rooftop in Osu to a wedding where the table ran the full length of the garden. The food is the reason people sit down. The table is the reason they stay.",
+      "stat": {
+        "value": 2600,
+        "suffix": "",
+        "caption": "people fed at events this year"
+      },
+      "stats": [
+        {
+          "value": 48,
+          "suffix": "",
+          "caption": "events catered"
+        },
+        {
+          "value": 180,
+          "suffix": "",
+          "caption": "seats at the longest table"
+        },
+        {
+          "value": 2600,
+          "suffix": "",
+          "caption": "people fed"
+        }
+      ],
+      "photo": {
+        "src": "/placeholders/table.svg",
+        "alt": "A long outdoor table set for 180 guests, seen from above, before anyone has sat down",
+        "width": 2400,
+        "height": 1600
+      },
+      "interactionHint": "Counting the people fed"
+    },
+    "story": {
+      "number": "09",
+      "label": "The story",
+      "headline": "A dish nobody hears about **is a secret**.",
+      "body": "I studied public relations and marketing before I ever ran a kitchen, and the two have never been separate for me. Seven menu launches, eleven campaigns, press dinners where the photographer ate as well as the critic. The cooking earns the attention. The telling makes sure it arrives.",
+      "degree": "BA Public Relations and Marketing, Ghana Institute of Journalism, 2017",
+      "interactionHint": "Drag the handle to compare before and after"
+    },
+    "work": {
+      "number": "10",
+      "label": "Work",
+      "headline": "What I've **plated**.",
+      "body": "Menus I have written, tables I have served, launches I have run, and the campaigns that put them in front of people."
+    },
+    "skills": {
+      "number": "11",
+      "label": "Skills",
+      "headline": "What's in **the pantry**.",
+      "body": "Two shelves. Tap anything to see the work it went into.",
+      "shelves": {
+        "kitchen": "Kitchen",
+        "studio": "Studio"
+      }
+    },
+    "experience": {
+      "number": "12",
+      "label": "Experience and credentials",
+      "headline": "Every service, **on the record**.",
+      "body": "From a commis station to the head of the pass, with a detour through a marketing desk that turned out not to be a detour at all.",
+      "showAllLabel": "Show the whole list",
+      "showLessLabel": "Show less",
+      "initiallyVisible": 3
+    },
+    "play": {
+      "number": "13",
+      "label": "Play",
+      "headline": "Want **to cook**?",
+      "body": "Two things to do before you go. A ninety-second pot to manage, and six ingredients hidden around this page."
+    },
+    "contact": {
+      "number": "14",
+      "label": "Contact",
+      "headline": "Come to **the table**.",
+      "body": "I am open to head chef and senior sous roles in Accra and beyond, private dinners and events of any size, and brand or menu collaborations where the food has something to say.",
+      "openTo": [
+        "Head chef and senior sous roles",
+        "Private dinners and events",
+        "Brand, menu and recipe work"
+      ],
+      "copyLabel": "Copy email",
+      "copiedLabel": "Copied",
+      "formNote": "This form opens your email app with the message filled in. Nothing you type is sent anywhere else."
+    }
+  },
+  "ingredients": [
+    {
+      "name": "Tomatoes",
+      "stands": "Sourcing",
+      "colour": "#C9412B",
+      "note": "Tuesday mornings at Agbogbloshie market, the same two women for six years. A pale tomato makes a pale pot, and no amount of heat will fix it. The dish is decided before the gas is on."
+    },
+    {
+      "name": "Onions",
+      "stands": "Patience",
+      "colour": "#E8D8C4",
+      "note": "Onions are not done until they are done. The first time I rushed them for a table of forty I learned that sweetness takes exactly as long as it takes, and so does a cook who is still learning."
+    },
+    {
+      "name": "Peppers",
+      "stands": "Balance",
+      "colour": "#D8572A",
+      "note": "Heat without hurt. I taste, adjust, taste again, and I am always seasoning for the quietest person at the table, not the loudest."
+    },
+    {
+      "name": "Spices",
+      "stands": "A palate",
+      "colour": "#9A5B1E",
+      "note": "The blends I grew up with, the ones I found in other people's kitchens, and the discipline of keeping them from shouting over each other. A spice should be recognised, not announced."
+    },
+    {
+      "name": "Stock",
+      "stands": "Seasonality",
+      "colour": "#D9A441",
+      "note": "What is in the pot changes with the month. I write menus backwards: first what is good in the market this week, then what to do with it."
+    }
+  ],
+  "gallery": [
+    {
+      "src": "photos/jollof-chicken-box.jpg",
+      "alt": "Jollof rice with a roasted chicken leg in a takeaway box, held over the serving tray",
+      "caption": "The jollof. Smoky bottom, every time.",
+      "width": 810,
+      "height": 1080,
+      "hidesIngredient": true,
+      "focus": "50% 58%"
+    },
+    {
+      "src": "/placeholders/dish-2.svg",
+      "alt": "Grilled tilapia on a bed of charred pepper sauce, from above",
+      "caption": "Tilapia on shito, the skin blistered, nothing hiding the fish.",
+      "width": 1600,
+      "height": 1600
+    },
+    {
+      "src": "/placeholders/dish-3.svg",
+      "alt": "A bowl of groundnut soup with a single rice ball, from above",
+      "caption": "Groundnut soup. One omo tuo, placed off centre on purpose.",
+      "width": 1600,
+      "height": 1600
+    },
+    {
+      "src": "/placeholders/dish-4.svg",
+      "alt": "Kelewele with roasted peanuts and a drizzle of ginger syrup, from above",
+      "caption": "Kelewele, but the ginger and the plantain both get to speak.",
+      "width": 1600,
+      "height": 1600
+    },
+    {
+      "src": "/placeholders/dish-5.svg",
+      "alt": "Waakye in a shallow bowl with all its sides arranged in a ring, from above",
+      "caption": "Waakye, served the way the stall does it, just slower.",
+      "width": 1600,
+      "height": 1600
+    },
+    {
+      "src": "/placeholders/dish-6.svg",
+      "alt": "A dessert of toasted coconut, palm sugar and a tart hibiscus sorbet, from above",
+      "caption": "Coconut, palm sugar, sobolo sorbet. Dessert that remembers where it is from.",
+      "width": 1600,
+      "height": 1600
+    }
+  ],
+  "story": {
+    "case": {
+      "title": "The Harmattan menu launch",
+      "summary": "A seven-course winter menu at The Loom in Osu that nobody outside the kitchen knew about. Three weeks of content, one press dinner and a single photograph of steam rising off a pot later, the room was booked out for a month.",
+      "before": {
+        "src": "/placeholders/before.svg",
+        "alt": "The old menu card, plain type on white, no photography",
+        "label": "Before",
+        "width": 1600,
+        "height": 1000
+      },
+      "after": {
+        "src": "/placeholders/after.svg",
+        "alt": "The Harmattan menu launch night, the pot photographed from above, the dining room full",
+        "label": "After",
+        "width": 1600,
+        "height": 1000
+      },
+      "metrics": [
+        {
+          "label": "Reach in launch week",
+          "before": "4,200",
+          "after": "61,000"
+        },
+        {
+          "label": "Covers in the first month",
+          "before": "310",
+          "after": "890"
+        },
+        {
+          "label": "Press mentions",
+          "before": "0",
+          "after": "6"
+        }
+      ]
+    },
+    "channels": [
+      {
+        "label": "Menu launches",
+        "value": 7,
+        "suffix": ""
+      },
+      {
+        "label": "Campaigns run",
+        "value": 11,
+        "suffix": ""
+      },
+      {
+        "label": "Largest launch reach",
+        "value": 61000,
+        "suffix": ""
+      }
+    ]
+  },
+  "projects": [
+    {
+      "id": "dzidzoze",
+      "kind": "Brand",
+      "name": "Dzidzɔ Ze",
+      "role": "Founder and chef",
+      "date": "2026",
+      "scale": "Kumasi · menu, online ordering and delivery",
+      "what": "My own food brand. Bold flavours, unforgettable taste: Ghanaian cooking made to order and delivered across Kumasi. A menu of main meals, platters, wraps and shawarma, snacks and drinks, ordered on the site or over Telegram, and event packages like the jollof and shawarma pre-orders for the Kumasi Debate Open.",
+      "outcome": "[TODO] A number or a moment from the brand's first months: orders, regulars, an event catered.",
+      "link": {
+        "href": "https://dzidzoze.vercel.app/",
+        "label": "Visit Dzidzɔ Ze"
+      },
+      "images": [
+        {
+          "src": "photos/jollof-chicken-box.jpg",
+          "alt": "A Dzidzɔ Ze box of jollof rice with a roasted chicken leg, held over the serving tray",
+          "width": 810,
+          "height": 1080,
+          "focus": "50% 58%"
+        }
+      ],
+      "skills": [
+        "west-african",
+        "menu-writing",
+        "costing",
+        "brand",
+        "social"
+      ]
+    },
+    {
+      "id": "menu",
+      "kind": "Menu",
+      "name": "The Harmattan menu",
+      "role": "Head chef",
+      "date": "2025",
+      "scale": "32 dishes, 2 services a day, 11 weeks",
+      "what": "A dry-season menu built around what Accra's markets are full of between December and February: smoked fish, late-season tomatoes, groundnuts, and the first good yams. Thirty-two dishes, each one costed to the gram and tested on the brigade before a guest ever saw it.",
+      "outcome": "Eight hundred and ninety covers in the first month, a waiting list for Friday and Saturday, and a food cost that came in two points under target.",
+      "images": [
+        {
+          "src": "photos/jollof-service-tray.jpg",
+          "alt": "Service: a box of jollof and chicken filled from a tray of roasted chicken and sausages",
+          "width": 810,
+          "height": 1080,
+          "focus": "50% 22%"
+        }
+      ],
+      "skills": [
+        "west-african",
+        "menu-writing",
+        "costing",
+        "team",
+        "photography"
+      ],
+      "hidesIngredient": true
+    },
+    {
+      "id": "event",
+      "kind": "Event",
+      "name": "A garden wedding for 180",
+      "role": "Chef and caterer",
+      "date": "2025",
+      "scale": "180 guests, 4 courses, one tent, one generator",
+      "what": "Four courses for one hundred and eighty people in a garden in East Legon, with a brigade of nine and a kitchen built that morning under a tent. The generator failed between the second and third courses. We finished the jollof on charcoal, which is how it should have been cooked in the first place.",
+      "outcome": "All one hundred and eighty served within eleven minutes of each course call. Three bookings from guests at the table before the cake was cut.",
+      "images": [
+        {
+          "src": "/placeholders/project-event.svg",
+          "alt": "The wedding table set under the trees, before guests arrived",
+          "width": 1600,
+          "height": 1000
+        }
+      ],
+      "skills": [
+        "events",
+        "team",
+        "safety",
+        "plating"
+      ]
+    },
+    {
+      "id": "launch",
+      "kind": "Launch",
+      "name": "Launching the Harmattan menu",
+      "role": "Chef and campaign lead",
+      "date": "2024",
+      "scale": "3 weeks, 2 channels, 1 press dinner",
+      "what": "A menu is a secret until somebody tells it. I planned the content around one image a day from the kitchen, cooked and shot by me, wrote every caption, and hosted a twelve-seat press dinner where the writers ate exactly what the guests would eat the next night.",
+      "outcome": "Reach in launch week went from four thousand two hundred to sixty-one thousand. Six press mentions. Covers nearly tripled in the month that followed.",
+      "images": [
+        {
+          "src": "photos/jollof-serving.jpg",
+          "alt": "A hand with tongs serving jollof and a chicken leg into a takeaway box",
+          "width": 810,
+          "height": 1080,
+          "focus": "45% 62%"
+        }
+      ],
+      "skills": [
+        "pr",
+        "social",
+        "copy",
+        "photography",
+        "brand"
+      ]
+    },
+    {
+      "id": "campaign",
+      "kind": "Campaign",
+      "name": "Six Sundays, a palm oil campaign",
+      "role": "Recipe developer and face of the campaign",
+      "date": "2024",
+      "scale": "6 recipes, 12 posts, 1 month",
+      "what": "A Ghanaian palm oil brand wanted to reach younger home cooks who had stopped using it. I developed six Sunday recipes, one a week, that treated palm oil as an ingredient with a flavour rather than a fat you hide. I cooked, shot and fronted every one of them.",
+      "outcome": "Two hundred and forty thousand views across the run, a sell-out of the one-litre bottle in two Accra supermarkets, and a second campaign commissioned before the first had ended.",
+      "images": [
+        {
+          "src": "/placeholders/project-campaign.svg",
+          "alt": "A still from the campaign, red palm oil poured over a bowl of rice",
+          "width": 1600,
+          "height": 1000
+        }
+      ],
+      "skills": [
+        "brand",
+        "social",
+        "copy",
+        "recipe-dev",
+        "photography"
+      ]
+    }
+  ],
+  "skills": {
+    "kitchen": [
+      {
+        "id": "west-african",
+        "label": "West African cooking"
+      },
+      {
+        "id": "modern-european",
+        "label": "Modern European"
+      },
+      {
+        "id": "menu-writing",
+        "label": "Menu writing"
+      },
+      {
+        "id": "costing",
+        "label": "Costing and margins"
+      },
+      {
+        "id": "safety",
+        "label": "Food safety, Level 3"
+      },
+      {
+        "id": "team",
+        "label": "Leading a brigade"
+      },
+      {
+        "id": "plating",
+        "label": "Plating"
+      },
+      {
+        "id": "recipe-dev",
+        "label": "Recipe development",
+        "hidesIngredient": true
+      }
+    ],
+    "studio": [
+      {
+        "id": "pr",
+        "label": "Press and PR"
+      },
+      {
+        "id": "social",
+        "label": "Social content"
+      },
+      {
+        "id": "copy",
+        "label": "Copywriting"
+      },
+      {
+        "id": "photography",
+        "label": "Food photography"
+      },
+      {
+        "id": "events",
+        "label": "Event planning"
+      },
+      {
+        "id": "brand",
+        "label": "Brand partnerships"
+      }
+    ]
+  },
+  "experience": {
+    "roles": [
+      {
+        "title": "Head chef",
+        "org": "The Loom",
+        "place": "Osu, Accra",
+        "start": "2024",
+        "end": "Now",
+        "note": "Sixty seats, fourteen cooks, two services a day, and the menu rewritten four times a year."
+      },
+      {
+        "title": "Sous chef",
+        "org": "Kaya Kitchen",
+        "place": "Airport Residential, Accra",
+        "start": "2021",
+        "end": "2024",
+        "note": "Ran the line on the busiest nights and took over the costing when the head chef left."
+      },
+      {
+        "title": "Chef de partie",
+        "org": "Kaya Kitchen",
+        "place": "Airport Residential, Accra",
+        "start": "2019",
+        "end": "2021",
+        "note": "Sauce and grill. Learned to taste before I plate, every single time."
+      },
+      {
+        "title": "Marketing assistant",
+        "org": "Blue Door Communications",
+        "place": "Cantonments, Accra",
+        "start": "2017",
+        "end": "2019",
+        "note": "Food and hospitality clients. Wrote the captions, shot the plates, and realised I wanted to be the one cooking them."
+      },
+      {
+        "title": "Commis chef",
+        "org": "Auntie Muni's Chop Bar",
+        "place": "Koforidua",
+        "start": "2016",
+        "end": "2017",
+        "note": "Peeled, washed, stirred, and was shouted at in the kindest possible way."
+      }
+    ],
+    "education": [
+      {
+        "title": "BA Public Relations and Marketing",
+        "org": "Ghana Institute of Journalism",
+        "start": "2014",
+        "end": "2017",
+        "note": "Taught me that a story is only finished when the right person hears it. Same as a plate."
+      },
+      {
+        "title": "Professional cookery diploma",
+        "org": "Bluecrest Culinary School",
+        "start": "2015",
+        "end": "2016",
+        "note": "Knife skills, stocks, and the first time anyone explained why the onions have to wait."
+      }
+    ],
+    "certificates": [
+      {
+        "title": "Food Safety and Hygiene, Level 3",
+        "issuer": "Highfield",
+        "year": "2023",
+        "covers": "Supervising food safety across a whole kitchen, from goods-in to the pass."
+      },
+      {
+        "title": "Allergen awareness",
+        "issuer": "Food Standards Agency",
+        "year": "2022",
+        "covers": "The fourteen major allergens, cross-contact, and how to write a menu that tells the truth."
+      },
+      {
+        "title": "First aid at work",
+        "issuer": "Ghana Red Cross Society",
+        "year": "2024",
+        "covers": "Burns, cuts and what to do in the ninety seconds before anyone else arrives."
+      }
+    ]
+  },
+  "play": {
+    "game": {
+      "title": "The jollof timer",
+      "intro": "Ninety seconds, one pot. Add each ingredient at the right moment, keep the heat in the band, and decide when to lift the lid.",
+      "rules": [
+        "Add in order: oil, onions, pepper base, stock, rice, then cover.",
+        "Keep the heat in the band shown. Too hot for too long and it burns. Too timid and it stays pale.",
+        "After the lid goes on, a short spell of high heat gives you the smoky bottom. Push it too far and you lose everything.",
+        "Lift the lid when you think it is ready, or let the clock run out."
+      ],
+      "startLabel": "Start cooking",
+      "notNowLabel": "Not now",
+      "playAgainLabel": "Play again",
+      "liftLabel": "Lift the lid and serve"
+    },
+    "recipe": {
+      "title": "Mehetabel's jollof",
+      "intro": "Six ingredients are hidden on this page: inside a grain, behind a photo, in the fire, in a skill, in a project and in the footer. Find all six and the recipe is yours to print.",
+      "ingredients": [
+        {
+          "id": "rice",
+          "label": "500 g long-grain parboiled rice, washed until the water runs clear",
+          "hidingPlace": "grain",
+          "hint": "Look inside the first grain."
+        },
+        {
+          "id": "tomato",
+          "label": "6 ripe plum tomatoes, 2 tbsp tomato paste",
+          "hidingPlace": "photo",
+          "hint": "Turn over the jollof plate."
+        },
+        {
+          "id": "pepper",
+          "label": "2 red bell peppers, 1 scotch bonnet, seeds in if you are brave",
+          "hidingPlace": "fire",
+          "hint": "Hold the heat high in the fire."
+        },
+        {
+          "id": "onion",
+          "label": "2 onions, one blended and one sliced thin",
+          "hidingPlace": "skill",
+          "hint": "One skill on the pantry shelf has it."
+        },
+        {
+          "id": "stock",
+          "label": "600 ml chicken stock, 1 bay leaf, a few sprigs of thyme",
+          "hidingPlace": "card",
+          "hint": "Open the right project."
+        },
+        {
+          "id": "oil",
+          "label": "100 ml vegetable oil, 1 tsp curry powder, a pinch of white pepper",
+          "hidingPlace": "footer",
+          "hint": "Read to the very end."
+        }
+      ],
+      "method": [
+        "Blend the tomatoes, peppers, scotch bonnet and one onion. Reduce the blend in a dry pan until it darkens and thickens. This is the step people skip, and it is the step that matters.",
+        "Heat the oil, soften the sliced onion, add the paste and fry until the oil turns red and separates.",
+        "Add the reduced blend, curry powder, thyme and bay. Cook until the raw tomato smell is gone and the sauce tastes like it has somewhere to be.",
+        "Add the stock and the washed rice. Season. Bring to a boil, then cover tightly with foil and a lid.",
+        "Lowest heat for 25 minutes. Do not open the lid. My grandmother is watching.",
+        "For the smoky bottom, raise the heat for the last three minutes. Rest ten minutes, then fluff from the edges in."
+      ],
+      "foundLabel": "found",
+      "unlockLabel": "Print the recipe",
+      "signoff": "Cooked and written by Mehetabel Gyebi Aquinas"
+    }
+  },
+  "footer": {
+    "line": "Built by hand. No tracking, no cookies.",
+    "backToTop": "Back to the top",
+    "copyright": "Mehetabel Gyebi Aquinas"
+  }
+}

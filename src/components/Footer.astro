@@ -1,0 +1,63 @@
+---
+import content from '../content/content.json';
+const { footer, owner, site, play } = content;
+const name = owner.useBusinessName && owner.businessName ? owner.businessName : owner.name;
+const year = new Date().getFullYear();
+const footerIngredient = play.recipe.ingredients.find((i) => i.hidingPlace === 'footer');
+---
+<footer class="footer stage-cool">
+  <div class="wrap footer-in">
+    <p class="quiet">© {year} {name}. {site.builtByHand && footer.line}</p>
+    <p class="quiet footer-right">
+      {footerIngredient && (
+        <button class="grain-find" type="button" data-find={footerIngredient.id} aria-label="A single grain, left on the table. Pick it up.">
+          <span class="grain-dot" aria-hidden="true"></span>
+        </button>
+      )}
+      <a href="#hello">{footer.backToTop}</a>
+    </p>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    border-top: 1px solid var(--rule);
+    padding-block: 2rem 3rem;
+    font-size: 0.9375rem;
+  }
+  .footer-in {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .footer-right {
+    display: inline-flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  .grain-find {
+    background: none;
+    border: 0;
+    padding: 0.4rem;
+    display: inline-flex;
+    border-radius: 999px;
+  }
+  .grain-dot {
+    width: 1.1em;
+    height: 0.5em;
+    border-radius: 50%;
+    background: var(--grain);
+    border: 1px solid rgba(143, 115, 82, 0.5);
+    transform: rotate(-28deg);
+    display: block;
+    transition: transform 0.3s var(--ease-out);
+  }
+  .grain-find:hover .grain-dot {
+    transform: rotate(-10deg) scale(1.2);
+  }
+  .grain-find[data-found] .grain-dot {
+    background: var(--jollof);
+    border-color: var(--jollof);
+  }
+</style>

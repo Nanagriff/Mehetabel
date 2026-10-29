@@ -1,0 +1,69 @@
+---
+import '../styles/global.css';
+import content from '../content/content.json';
+const { preloadImage } = Astro.props;
+const { site, owner } = content;
+const name = owner.useBusinessName && owner.businessName ? owner.businessName : owner.name;
+const title = site.title.includes('[TODO') ? `${name}, chef` : site.title;
+const canonical = new URL('/', Astro.site ?? site.url).toString();
+const og = new URL(site.ogImage, Astro.site ?? site.url).toString();
+---
+<!doctype html>
+<html lang={site.lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={site.description} />
+    <link rel="canonical" href={canonical} />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" content="#f6efe3" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#16110e" media="(prefers-color-scheme: dark)" />
+
+    <link rel="icon" href="/favicon.ico" sizes="32x32" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={site.description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={og} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={`${name} with a single grain of rice`} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={site.description} />
+    <meta name="twitter:image" content={og} />
+
+    <link rel="preload" href="/fonts/fraunces-latin-opsz-normal.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/source-sans-3-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin />
+    {preloadImage && <link rel="preload" as="image" href={preloadImage.href} imagesrcset={preloadImage.srcset} imagesizes={preloadImage.sizes} fetchpriority="high" />}
+
+    <script is:inline>
+      document.documentElement.classList.add('js');
+    </script>
+  </head>
+  <body>
+    <noscript>
+      <p class="noscript-note">
+        JavaScript is off, so the grain of rice stays still. The story still reads from top to bottom.
+      </p>
+    </noscript>
+    <slot />
+  </body>
+</html>
+
+<style is:global>
+  .noscript-note {
+    margin: 0;
+    padding: 0.75rem var(--gutter);
+    background: var(--ivory-deep);
+    color: var(--ink);
+    font-size: 0.9375rem;
+    text-align: center;
+    max-width: none;
+  }
+</style>

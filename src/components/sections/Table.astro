@@ -1,0 +1,10 @@
+---
+import Narrative from '../Narrative.astro';
+import Pic from '../Pic.astro';
+import content from '../../content/content.json';
+const s = content.sections.table;
+---
+<Narrative id="table" s={s} stage="warm" keyIndex={8} />
+<figure class="bleed">
+  <Pic src={s.photo.src} alt={s.photo.alt} width={s.photo.width} height={s.photo.height} sizes="100vw" />
+</figure>

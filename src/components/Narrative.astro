@@ -1,0 +1,50 @@
+---
+// The repeating shape of a story section: number and label, two-part headline, a line or two in her voice,
+// one real number, and a hint for what the grain is doing. Extras go in the slot.
+import { bold, fmt } from '../utils/markup.js';
+const { id, s, stage = 'cold', keyIndex, class: cls = '', hideStat = false } = Astro.props;
+const todo = (t) => (/\[TODO/.test(t ?? '') ? 'todo' : '');
+// Keys 1 to 9 are the story beats, where the grain is the picture; later sections are reference material.
+const beat = keyIndex >= 1 && keyIndex <= 9 ? 'beat' : '';
+---
+<section
+  id={id}
+  class={`section narrative stage-${stage} ${beat} ${cls}`}
+  data-key={keyIndex}
+  aria-labelledby={`${id}-h`}
+>
+  <div class="wrap">
+    <div class="pin">
+      <p class="label reveal"><b>{s.number}</b>{s.label}</p>
+      <h2 id={`${id}-h`} class="reveal" set:html={bold(s.headline)} />
+      {s.body && <p class={`lede reveal ${todo(s.body)}`}>{s.body}</p>}
+      <slot />
+      {
+        !hideStat && s.stat && !s.stats && (
+          <div class="stat reveal">
+            <span class="num" data-count={s.stat.value} data-suffix={s.stat.suffix ?? ''}>
+              {fmt(s.stat.value)}{s.stat.suffix ?? ''}
+            </span>
+            <span class="cap">{s.stat.caption}</span>
+          </div>
+        )
+      }
+      {
+        !hideStat && s.stats && (
+          <ul class="stats reveal">
+            {s.stats.map((st) => (
+              <li>
+                <span class="num" data-count={st.value} data-suffix={st.suffix ?? ''}>
+                  {fmt(st.value)}{st.suffix ?? ''}
+                </span>
+                <span class="cap">{st.caption}</span>
+              </li>
+            ))}
+          </ul>
+        )
+      }
+      <slot name="after" />
+      {s.interactionHint && <p class="hint">{s.interactionHint}</p>}
+    </div>
+  </div>
+</section>

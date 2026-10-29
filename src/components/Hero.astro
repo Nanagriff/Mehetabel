@@ -1,0 +1,162 @@
+---
+import content from '../content/content.json';
+import Pic from './Pic.astro';
+const { hero, owner } = content;
+const todo = (s) => (/\[TODO/.test(s) ? 'todo' : '');
+---
+<section id="hello" class="section hero stage-cold" data-key="0" aria-labelledby="hello-h">
+  <div class="hero-grid">
+    <div class="hero-text">
+      <p class="label"><b>{hero.number}</b>{hero.label}</p>
+      <h1 id="hello-h" class="hero-lines">
+        <span class={`line ${todo(hero.lines[0])}`}>{hero.lines[0]}</span>
+        <span class="line strong">{hero.lines[1]}</span>
+        <span class="line">{hero.lines[2]}</span>
+      </h1>
+      <p class={`lede quiet ${todo(hero.sub)}`}>{hero.sub}</p>
+      <div class="hero-actions">
+        <a class="btn btn-fill" href={owner.cv} download>{owner.cvLabel}</a>
+        <a class="btn" href="#contact">Send an enquiry</a>
+      </div>
+      <p class="scroll-prompt" aria-hidden="true">
+        <span class="grain-dot"></span>{hero.scrollPrompt}
+      </p>
+      <p class="skip-row">
+        <a class="link-arrow" href="#work">{hero.skipLabel}</a>
+        <span class="press-key quiet" data-press-key>{hero.pressKey}</span>
+      </p>
+    </div>
+    <div class="hero-photo">
+      <Pic
+        src={hero.portrait.src}
+        alt={hero.portrait.alt}
+        width={hero.portrait.width}
+        height={hero.portrait.height}
+        loading="eager"
+        fetchpriority="high"
+        sizes="(min-width: 60rem) 55vw, 100vw"
+      />
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    padding: 0;
+    min-height: calc(100vh - var(--topbar-h));
+    min-height: calc(100svh - var(--topbar-h));
+    display: grid;
+    overflow: hidden;
+  }
+  .hero-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
+    min-height: inherit;
+    width: 100%;
+  }
+  .hero-text {
+    padding: clamp(2rem, 6vh, 5rem) var(--gutter) clamp(2rem, 8vh, 5rem);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    max-width: 40rem;
+    justify-self: end;
+    width: 100%;
+  }
+  .hero-lines {
+    font-size: clamp(2rem, 1.4rem + 3.2vw, 4.25rem);
+    display: grid;
+    gap: 0.1em;
+    max-width: 12ch;
+    margin-bottom: 1.25rem;
+  }
+  .line {
+    display: block;
+  }
+  .line.strong {
+    font-weight: 560;
+    font-variation-settings: 'opsz' 144;
+  }
+  .hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+  }
+  .scroll-prompt {
+    margin-top: clamp(2rem, 8vh, 5rem);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6em;
+    color: var(--ink-soft);
+    font-size: 0.9375rem;
+  }
+  html:not(.js) .scroll-prompt {
+    display: none;
+  }
+  .grain-dot {
+    width: 1.3em;
+    height: 0.55em;
+    border-radius: 50%;
+    background: var(--grain);
+    border: 1px solid rgba(143, 115, 82, 0.5);
+    transform: rotate(-28deg);
+    animation: nudge 2.4s ease-in-out infinite;
+  }
+  @keyframes nudge {
+    0%, 100% { transform: rotate(-28deg) translateY(0); }
+    50% { transform: rotate(-28deg) translateY(4px); }
+  }
+  .skip-row {
+    display: flex;
+    gap: 1.25rem;
+    align-items: baseline;
+    flex-wrap: wrap;
+    font-size: 0.9375rem;
+    margin-top: 0.5rem;
+  }
+  html:not(.js) .press-key {
+    display: none;
+  }
+  .hero-photo {
+    position: relative;
+    min-height: 60vh;
+  }
+  .hero-photo :global(img) {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+  }
+  .hero-photo::after {
+    /* a breath of ivory where the photo meets the text, so the two feel like one afternoon */
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, var(--bg) 0%, transparent 18%);
+    pointer-events: none;
+  }
+  @media (max-width: 59.99rem) {
+    .hero-grid {
+      grid-template-columns: 1fr;
+      grid-template-rows: auto auto;
+    }
+    .hero-photo {
+      order: -1;
+      min-height: 58vh;
+      min-height: 58svh;
+    }
+    .hero-photo::after {
+      background: linear-gradient(180deg, transparent 70%, var(--bg) 100%);
+    }
+    .hero-text {
+      justify-self: start;
+      padding-top: 1rem;
+    }
+    .scroll-prompt {
+      margin-top: 2rem;
+    }
+  }
+</style>

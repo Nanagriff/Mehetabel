@@ -1,0 +1,94 @@
+---
+import Base from '../layouts/Base.astro';
+import TopBar from '../components/TopBar.astro';
+import Hero from '../components/Hero.astro';
+import Narrative from '../components/Narrative.astro';
+import GrainCanvas from '../components/GrainCanvas.astro';
+import Footer from '../components/Footer.astro';
+import Ingredients from '../components/sections/Ingredients.astro';
+import Fire from '../components/sections/Fire.astro';
+import Secret from '../components/sections/Secret.astro';
+import Pot from '../components/sections/Pot.astro';
+import Plate from '../components/sections/Plate.astro';
+import Table from '../components/sections/Table.astro';
+import Story from '../components/sections/Story.astro';
+import Work from '../components/sections/Work.astro';
+import Skills from '../components/sections/Skills.astro';
+import Experience from '../components/sections/Experience.astro';
+import Play from '../components/sections/Play.astro';
+import Contact from '../components/sections/Contact.astro';
+import content from '../content/content.json';
+import { resolvePhoto } from '../utils/photos.js';
+import { getImage } from 'astro:assets';
+
+const { sections, play } = content;
+const grainIngredient = play.recipe.ingredients.find((i) => i.hidingPlace === 'grain');
+
+// Preload the hero portrait: the same AVIF candidates and sizes as the <picture> renders, so whichever
+// one the phone or the desktop picks is already on its way.
+const heroSizes = '(min-width: 60rem) 55vw, 100vw';
+let preload = { href: content.hero.portrait.src };
+const meta = resolvePhoto(preload.href);
+if (meta) {
+  const widths = [...new Set([480, 960, 1600, 2400].filter((w) => w < meta.width).concat(meta.width))];
+  const variants = await Promise.all(widths.map((width) => getImage({ src: meta, format: 'avif', width })));
+  preload = {
+    href: variants[variants.length - 1].src,
+    srcset: variants.map((v, i) => `${v.src} ${widths[i]}w`).join(', '),
+    sizes: heroSizes,
+  };
+}
+const keyNumber = sections.manyGrains.stat?.value ?? 1000;
+---
+<Base preloadImage={preload}>
+  <TopBar />
+  <GrainCanvas />
+  <main id="main" data-key-number={keyNumber}>
+    <Hero />
+
+    <Narrative id="one-grain" s={sections.oneGrain} stage="cold" keyIndex={1} class="one-grain">
+      <div class="grain-handle-row reveal" slot="after">
+        <button class="btn btn-small grain-handle" type="button" data-grain-handle aria-label="Turn the grain. Use the left and right arrow keys, press Enter to look inside.">
+          Turn the grain
+        </button>
+        {grainIngredient && (
+          <button class="btn btn-small" type="button" data-find={grainIngredient.id} data-grain-inside hidden>
+            There's something inside. Take it.
+          </button>
+        )}
+      </div>
+    </Narrative>
+
+    <Narrative id="many-grains" s={sections.manyGrains} stage="cold" keyIndex={2} />
+
+    <Ingredients />
+    <Fire />
+    <Secret />
+    <Pot />
+    <Plate />
+    <Table />
+    <Story />
+    <Work />
+    <Skills />
+    <Experience />
+    <Play />
+    <Contact />
+  </main>
+  <Footer />
+
+  <script>
+    import '../scripts/main.js';
+  </script>
+</Base>
+
+<style>
+  .grain-handle-row {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    margin-top: 1.5rem;
+  }
+  html:not(.js) .grain-handle-row {
+    display: none;
+  }
+</style>
