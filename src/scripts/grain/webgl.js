@@ -1,7 +1,7 @@
 // WebGL renderer for the grain, on OGL. Every keyframe lives in a float texture; the vertex shader does
 // all the blending, so the CPU does nothing per particle per frame.
 import { Renderer, Camera, Transform, Program, Mesh, Geometry, Texture, Sphere, Plane } from 'ogl';
-import { K, MODE, STAGGER, SIZE, KIND_PARAMS, KIND_ALPHA, buildKeyframes, meshAt, fireLayout } from './keyframes.js';
+import { K, MODE, STAGGER, SIZE, sizeFor, KIND_PARAMS, KIND_ALPHA, buildKeyframes, meshAt, fireLayout } from './keyframes.js';
 import { buildAtlas, COLS, ROWS } from './sprites.js';
 import { buildProps, propOpacity } from './props.js';
 import { grainState } from './state.js';
@@ -396,6 +396,7 @@ export function create(canvas, { n, reduced, number, ingredients, fontFamily }) 
     camera.perspective({ aspect });
     uniforms.uPointScale.value = H * 0.03 * renderer.dpr * Math.sqrt(6000 / n) * dist * (mobile ? 0.85 : 1);
     uniforms.uSpriteScale.value = Math.sqrt(n / 6000) * (mobile ? 0.62 : 1); // the phone's pile is wide and low
+    uniforms.uSize.value = sizeFor(mobile);
     const ticket = ++building;
     const kf = await buildKeyframes({ n, aspect, mobile, number, ingredients, fontFamily });
     if (ticket !== building) return; // a newer rebuild superseded this one

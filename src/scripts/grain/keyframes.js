@@ -9,6 +9,8 @@ export const MODE = [0, 0, 1, 1, 2, 0, 0, 0, 2, 2, 2, 0, 0, 2, 0];
 export const STAGGER = [0, 0, 0.75, 0.8, 0.6, 0.2, 0.2, 0.5, 0.6, 0.7, 0.5, 0.4, 0.4, 0.6, 0.3];
 // Relative grain size per keyframe.
 export const SIZE = [0, 0, 1, 1, 0.82, 0.85, 0.82, 0.8, 0.55, 0.95, 1.1, 1.2, 1.15, 1.1, 0];
+// On a phone the word at 09 is small, so its grains shrink to keep the letters readable.
+export const sizeFor = (mobile) => { const s = SIZE.slice(); if (mobile) s[9] = 0.5; return s; };
 
 export function mulberry32(a) {
   return function () {
@@ -116,11 +118,11 @@ function textPoints(text, count, box, rng, fontFamily) {
   ctx.textAlign = 'center';
   ctx.textBaseline = 'middle';
   let px = 150;
-  ctx.font = `600 ${px}px ${fontFamily}`;
+  ctx.font = `800 ${px}px ${fontFamily}`;
   const tw = ctx.measureText(text).width;
   if (tw > W * 0.92) {
     px = Math.floor((px * W * 0.92) / tw);
-    ctx.font = `600 ${px}px ${fontFamily}`;
+    ctx.font = `800 ${px}px ${fontFamily}`;
   }
   ctx.fillText(text, W / 2, H / 2 + px * 0.05);
   const data = ctx.getImageData(0, 0, W, H).data;
@@ -401,7 +403,10 @@ export async function buildKeyframes({ n, aspect, mobile, number, ingredients = 
   // 09: the story. The grains spell a word and stack into a small feed of posts.
   {
     const wordN = Math.floor(n * 0.62);
-    const word = textPoints('shared', wordN, { cx: box.cx, cy: box.cy + box.h * 0.18, w: box.w, h: box.h * 0.42 }, rng, fontFamily);
+    // on the phone the word takes the whole width of the stage so the letters stay readable
+    const word = mobile
+      ? textPoints('shared', wordN, { cx: box.cx, cy: box.cy + box.h * 0.14, w: aspect * 2 * 0.94, h: box.h * 0.56 }, rng, fontFamily)
+      : textPoints('shared', wordN, { cx: box.cx, cy: box.cy + box.h * 0.18, w: box.w, h: box.h * 0.42 }, rng, fontFamily);
     const posts = 3;
     const pw = box.w * 0.26, ph = box.h * 0.2;
     for (let i = 0; i < n; i += 1) {
@@ -414,7 +419,7 @@ export async function buildKeyframes({ n, aspect, mobile, number, ingredients = 
       } else {
         const j = i % posts;
         const px = box.cx - box.w * 0.34 + j * box.w * 0.34;
-        const py = box.cy - box.h * 0.3;
+        const py = box.cy - box.h * (mobile ? 0.36 : 0.3);
         const inner = rng() < 0.75;
         p = inner ? rectFill(1, px, py + ph * 0.1, pw * 0.88, ph * 0.55, rng)[0] : rectEdge(1, px, py, pw, ph, 0.02, rng)[0];
         c = inner ? [0.9, 0.82, 0.7] : grainCol(i);

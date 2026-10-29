@@ -48,7 +48,7 @@ const n = s.initiallyVisible ?? 3;
             <button class="flip" type="button" aria-pressed="false" aria-describedby={`cert-back-${i}`}>
               <span class="face front">
                 <span class={`cert-title ${todo(c.title)}`}>{c.title}</span>
-                <span class="quiet">{c.issuer} · {c.year}</span>
+                <span class="quiet">{c.issuer}{c.year && ` · ${c.year}`}</span>
                 <span class="flip-hint quiet">Turn over</span>
               </span>
               <span class="face back" id={`cert-back-${i}`}>

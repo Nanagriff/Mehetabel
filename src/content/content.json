@@ -85,25 +85,25 @@
       "number": "02",
       "label": "Many grains",
       "headline": "One grain is nothing. **A thousand is a meal.**",
-      "body": "A Saturday night in a full dining room is four hundred and twenty plates, each one leaving the pass the way the first one did. Scale is not louder cooking. It is the same care, repeated until nobody can tell which plate was number one.",
+      "body": "A Wednesday special is sixty boxes of jollof, each one leaving the counter the way the first one did. Scale is not louder cooking. It is the same care, repeated until nobody can tell which box was number one.",
       "stat": {
-        "value": 420,
+        "value": 60,
         "suffix": "",
-        "caption": "covers on a Saturday night"
+        "caption": "boxes on a Wednesday special"
       },
       "stats": [
         {
-          "value": 420,
+          "value": 60,
           "suffix": "",
-          "caption": "covers on a Saturday"
+          "caption": "boxes on a Wednesday"
         },
         {
-          "value": 38,
+          "value": 25,
           "suffix": "",
           "caption": "plates a service, on average"
         },
         {
-          "value": 12000,
+          "value": 500,
           "suffix": "+",
           "caption": "people fed last year"
         }
@@ -121,7 +121,7 @@
       "number": "04",
       "label": "The fire",
       "headline": "Technique is what **the fire reveals**.",
-      "body": "Nine years at the stove, from scrubbing cassava in a chop bar to running the pass in a sixty-seat dining room. Fire does not care about your plans. It taught me to cut faster, taste sooner, and say sorry to a pot only once.",
+      "body": "Nine years at the stove, from scrubbing cassava in a chop bar to running my own kitchen in Kumasi. Fire does not care about your plans. It taught me to cut faster, taste sooner, and say sorry to a pot only once.",
       "stat": {
         "value": 9,
         "suffix": "",
@@ -178,32 +178,32 @@
       "number": "08",
       "label": "The table",
       "headline": "Food is only finished **when it's shared**.",
-      "body": "Forty-eight events this year, from a dinner for eight on a rooftop in Osu to a wedding where the table ran the full length of the garden. The food is the reason people sit down. The table is the reason they stay.",
+      "body": "Twelve events this year, from a dinner for eight on a rooftop in Osu to a wedding where the table ran the full length of the garden. The food is the reason people sit down. The table is the reason they stay.",
       "stat": {
-        "value": 2600,
+        "value": 300,
         "suffix": "",
         "caption": "people fed at events this year"
       },
       "stats": [
         {
-          "value": 48,
+          "value": 12,
           "suffix": "",
           "caption": "events catered"
         },
         {
-          "value": 180,
+          "value": 60,
           "suffix": "",
           "caption": "seats at the longest table"
         },
         {
-          "value": 2600,
+          "value": 300,
           "suffix": "",
           "caption": "people fed"
         }
       ],
       "photo": {
         "src": "/placeholders/table.svg",
-        "alt": "A long outdoor table set for 180 guests, seen from above, before anyone has sat down",
+        "alt": "A long outdoor table set for 60 guests, seen from above, before anyone has sat down",
         "width": 2400,
         "height": 1600
       },
@@ -213,8 +213,8 @@
       "number": "09",
       "label": "The story",
       "headline": "A dish nobody hears about **is a secret**.",
-      "body": "I studied public relations and marketing before I ever ran a kitchen, and the two have never been separate for me. Seven menu launches, eleven campaigns, press dinners where the photographer ate as well as the critic. The cooking earns the attention. The telling makes sure it arrives.",
-      "degree": "BA Public Relations and Marketing, Ghana Institute of Journalism, 2017",
+      "body": "I studied public relations and marketing before I ever ran a kitchen, and the two have never been separate for me. Three menu launches, five campaigns, and a Wednesday special that people had heard about before they tasted it. The cooking earns the attention. The telling makes sure it arrives.",
+      "degree": "BSc Public Relations with Marketing, UniMAC",
       "interactionHint": "Drag the handle to compare before and after"
     },
     "work": {
@@ -343,18 +343,18 @@
   ],
   "story": {
     "case": {
-      "title": "The Harmattan menu launch",
-      "summary": "A seven-course winter menu at The Loom in Osu that nobody outside the kitchen knew about. Three weeks of content, one press dinner and a single photograph of steam rising off a pot later, the room was booked out for a month.",
+      "title": "The Wednesday special jollof",
+      "summary": "One pot of jollof, every Wednesday, from a kitchen in Kumasi that nobody outside the family knew about. Two weeks of content and a single photograph of steam rising off the pot later, the Wednesday boxes were spoken for by Tuesday night.",
       "before": {
         "src": "/placeholders/before.svg",
-        "alt": "The old menu card, plain type on white, no photography",
+        "alt": "The first Wednesday post, plain type on a plain background, no photography",
         "label": "Before",
         "width": 1600,
         "height": 1000
       },
       "after": {
         "src": "/placeholders/after.svg",
-        "alt": "The Harmattan menu launch night, the pot photographed from above, the dining room full",
+        "alt": "The Wednesday special, the pot photographed from above, the boxes lined up for delivery",
         "label": "After",
         "width": 1600,
         "height": 1000
@@ -362,35 +362,35 @@
       "metrics": [
         {
           "label": "Reach in launch week",
-          "before": "4,200",
-          "after": "61,000"
+          "before": "50",
+          "after": "330"
         },
         {
-          "label": "Covers in the first month",
-          "before": "310",
-          "after": "890"
+          "label": "Boxes sold in the first month",
+          "before": "40",
+          "after": "130"
         },
         {
-          "label": "Press mentions",
-          "before": "0",
-          "after": "6"
+          "label": "Reposts and mentions",
+          "before": "1",
+          "after": "12"
         }
       ]
     },
     "channels": [
       {
         "label": "Menu launches",
-        "value": 7,
+        "value": 3,
         "suffix": ""
       },
       {
         "label": "Campaigns run",
-        "value": 11,
+        "value": 5,
         "suffix": ""
       },
       {
         "label": "Largest launch reach",
-        "value": 61000,
+        "value": 330,
         "suffix": ""
       }
     ]
@@ -429,12 +429,12 @@
     {
       "id": "menu",
       "kind": "Menu",
-      "name": "The Harmattan menu",
-      "role": "Head chef",
-      "date": "2025",
-      "scale": "32 dishes, 2 services a day, 11 weeks",
-      "what": "A dry-season menu built around what Accra's markets are full of between December and February: smoked fish, late-season tomatoes, groundnuts, and the first good yams. Thirty-two dishes, each one costed to the gram and tested on the brigade before a guest ever saw it.",
-      "outcome": "Eight hundred and ninety covers in the first month, a waiting list for Friday and Saturday, and a food cost that came in two points under target.",
+      "name": "The Wednesday special",
+      "role": "Founder and head chef",
+      "date": "2026",
+      "scale": "1 pot, every Wednesday, 60 boxes",
+      "what": "A weekly special built around what Kumasi's markets are full of that week: smoked fish one Wednesday, the first good tomatoes the next. One pot of jollof, costed to the gram, cooked by me, boxed with chicken, and gone by the time it was cool enough to pack.",
+      "outcome": "One hundred and thirty boxes in the first month, a list of regulars who order by Tuesday night, and a food cost that came in two points under target.",
       "images": [
         {
           "src": "photos/jollof-service-tray.jpg",
@@ -456,12 +456,12 @@
     {
       "id": "event",
       "kind": "Event",
-      "name": "A garden wedding for 180",
+      "name": "A garden wedding for 60",
       "role": "Chef and caterer",
       "date": "2025",
-      "scale": "180 guests, 4 courses, one tent, one generator",
-      "what": "Four courses for one hundred and eighty people in a garden in East Legon, with a brigade of nine and a kitchen built that morning under a tent. The generator failed between the second and third courses. We finished the jollof on charcoal, which is how it should have been cooked in the first place.",
-      "outcome": "All one hundred and eighty served within eleven minutes of each course call. Three bookings from guests at the table before the cake was cut.",
+      "scale": "60 guests, 4 courses, one tent, one generator",
+      "what": "Four courses for sixty people in a garden in East Legon, with a brigade of three and a kitchen built that morning under a tent. The generator failed between the second and third courses. We finished the jollof on charcoal, which is how it should have been cooked in the first place.",
+      "outcome": "All sixty served within eleven minutes of each course call. Three bookings from guests at the table before the cake was cut.",
       "images": [
         {
           "src": "/placeholders/project-event.svg",
@@ -480,12 +480,12 @@
     {
       "id": "launch",
       "kind": "Launch",
-      "name": "Launching the Harmattan menu",
-      "role": "Chef and campaign lead",
-      "date": "2024",
-      "scale": "3 weeks, 2 channels, 1 press dinner",
-      "what": "A menu is a secret until somebody tells it. I planned the content around one image a day from the kitchen, cooked and shot by me, wrote every caption, and hosted a twelve-seat press dinner where the writers ate exactly what the guests would eat the next night.",
-      "outcome": "Reach in launch week went from four thousand two hundred to sixty-one thousand. Six press mentions. Covers nearly tripled in the month that followed.",
+      "name": "Launching the Wednesday special",
+      "role": "Founder and campaign lead",
+      "date": "2026",
+      "scale": "2 weeks, 2 channels, 1 pot",
+      "what": "A dish is a secret until somebody tells it. I planned the content around one image a day from the kitchen, cooked and shot by me, wrote every caption, and sent the first Wednesday's boxes to twelve people who would talk about them.",
+      "outcome": "Reach in launch week went from fifty to three hundred and thirty. Twelve reposts and mentions. Boxes more than tripled in the month that followed.",
       "images": [
         {
           "src": "photos/jollof-serving.jpg",
@@ -595,63 +595,37 @@
   "experience": {
     "roles": [
       {
-        "title": "Head chef",
-        "org": "The Loom",
-        "place": "Osu, Accra",
-        "start": "2024",
+        "title": "Founder and head chef",
+        "org": "Dzidzɔ Ze",
+        "place": "Kumasi",
+        "start": "2026",
         "end": "Now",
-        "note": "Sixty seats, fourteen cooks, two services a day, and the menu rewritten four times a year."
-      },
-      {
-        "title": "Sous chef",
-        "org": "Kaya Kitchen",
-        "place": "Airport Residential, Accra",
-        "start": "2021",
-        "end": "2024",
-        "note": "Ran the line on the busiest nights and took over the costing when the head chef left."
-      },
-      {
-        "title": "Chef de partie",
-        "org": "Kaya Kitchen",
-        "place": "Airport Residential, Accra",
-        "start": "2019",
-        "end": "2021",
-        "note": "Sauce and grill. Learned to taste before I plate, every single time."
-      },
-      {
-        "title": "Marketing assistant",
-        "org": "Blue Door Communications",
-        "place": "Cantonments, Accra",
-        "start": "2017",
-        "end": "2019",
-        "note": "Food and hospitality clients. Wrote the captions, shot the plates, and realised I wanted to be the one cooking them."
-      },
-      {
-        "title": "Commis chef",
-        "org": "Auntie Muni's Chop Bar",
-        "place": "Koforidua",
-        "start": "2016",
-        "end": "2017",
-        "note": "Peeled, washed, stirred, and was shouted at in the kindest possible way."
+        "note": "My own food brand: the menu, the pot, the boxes, the delivery, and every caption that goes out with them."
       }
     ],
     "education": [
       {
-        "title": "BA Public Relations and Marketing",
-        "org": "Ghana Institute of Journalism",
-        "start": "2014",
-        "end": "2017",
+        "title": "BSc Public Relations with Marketing",
+        "org": "UniMAC",
+        "start": "2022",
+        "end": "2024",
         "note": "Taught me that a story is only finished when the right person hears it. Same as a plate."
       },
       {
-        "title": "Professional cookery diploma",
-        "org": "Bluecrest Culinary School",
-        "start": "2015",
-        "end": "2016",
-        "note": "Knife skills, stocks, and the first time anyone explained why the onions have to wait."
+        "title": "Diploma in Public Relations",
+        "org": "Accra Technical University",
+        "start": "2020",
+        "end": "2022",
+        "note": "The first time anyone taught me to write for the person reading, not the person writing."
       }
     ],
     "certificates": [
+      {
+        "title": "Professional chef certificate",
+        "issuer": "Culinary school",
+        "year": "",
+        "covers": "Knife skills, stocks, and the first time anyone explained why the onions have to wait."
+      },
       {
         "title": "Food Safety and Hygiene, Level 3",
         "issuer": "Highfield",

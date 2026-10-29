@@ -1,5 +1,5 @@
 // 2D canvas fallback: the same story with fewer grains, for devices without WebGL2 or that cannot keep up.
-import { K, MODE, STAGGER, SIZE, KIND_PARAMS, KIND_ALPHA, isSpriteKind, buildKeyframes, meshAt, fireLayout } from './keyframes.js';
+import { K, MODE, STAGGER, SIZE, sizeFor, KIND_PARAMS, KIND_ALPHA, isSpriteKind, buildKeyframes, meshAt, fireLayout } from './keyframes.js';
 import { buildAtlas, TILE } from './sprites.js';
 import { buildProps, propOpacity } from './props.js';
 import { grainState } from './state.js';
@@ -10,7 +10,7 @@ export function create(canvas, { n, reduced, number, ingredients, fontFamily }) 
   const atlas = buildAtlas();
   let spriteScale = 1; // pieces keep their size whatever the grain count
   const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
-  let kf, props = [], aspect = 1, mobile = false, W = 1, H = 1;
+  let kf, props = [], aspect = 1, mobile = false, W = 1, H = 1, sizes = SIZE;
   const rnd = new Float32Array(n * 4);
   let s = 7;
   const r = () => { s = (s * 16807) % 2147483647; return (s - 1) / 2147483646; };
@@ -28,6 +28,7 @@ export function create(canvas, { n, reduced, number, ingredients, fontFamily }) 
     canvas.height = Math.round(H * dpr);
     aspect = W / H;
     mobile = W < 960;
+    sizes = sizeFor(mobile);
     pointScale = H * 0.03 * Math.sqrt(6000 / n) * (mobile ? 0.85 : 1) * 0.5;
     spriteScale = Math.sqrt(n / 6000) * (mobile ? 0.62 : 1);
     const ticket = ++building;
@@ -140,7 +141,7 @@ export function create(canvas, { n, reduced, number, ingredients, fontFamily }) 
       const glow = wGlow * st.glow * loose;
       cr += 0.1 * glow; cg += 0.06 * glow; cb += 0.02 * glow;
       const wS = (isSpriteKind(kA) ? 1 : 0) + ((isSpriteKind(kB) ? 1 : 0) - (isSpriteKind(kA) ? 1 : 0)) * e;
-      const size = (SIZE[k] + (SIZE[k + 1] - SIZE[k]) * e) * sizeMul * (1 + (spriteScale - 1) * wS) * (0.6 + 0.6 * rz) * pointScale;
+      const size = (sizes[k] + (sizes[k + 1] - sizes[k]) * e) * sizeMul * (1 + (spriteScale - 1) * wS) * (0.6 + 0.6 * rz) * pointScale;
       if (size < 0.4) continue;
       const shade = 0.88 + 0.2 * rw;
       const R = (cr * shade * 255) | 0, G = (cg * shade * 255) | 0, Bc = (cb * shade * 255) | 0;

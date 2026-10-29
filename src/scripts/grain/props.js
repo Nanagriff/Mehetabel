@@ -235,6 +235,60 @@ function salad(ctx, x, y, r, seed = 1) {
   ctx.restore();
 }
 
+// Cutlery beside the plate: stainless, lit from the top left, handles toward the diner.
+function steel(ctx, x0, x1) {
+  const g = ctx.createLinearGradient(x0, 0, x1, 0);
+  g.addColorStop(0, '#b4b8bd'); g.addColorStop(0.22, '#f3f4f2'); g.addColorStop(0.5, '#d6d8da'); g.addColorStop(0.78, '#8d9298'); g.addColorStop(1, '#c6c9cd');
+  return g;
+}
+function fork(ctx, x, y, len, k) {
+  ctx.save(); ctx.translate(x, y); ctx.rotate(-0.05);
+  softShadow(ctx, len * 0.035, len * 0.045, len * 0.09, len * 0.5, 0.26, k);
+  const hw = len * 0.042;
+  ctx.fillStyle = steel(ctx, -len * 0.08, len * 0.08);
+  ctx.strokeStyle = 'rgba(50,52,58,0.3)'; ctx.lineWidth = Math.max(1, len * 0.006);
+  // the handle, a narrow neck, then the shoulders of the head
+  ctx.beginPath();
+  ctx.moveTo(-hw, len * 0.46); ctx.quadraticCurveTo(0, len * 0.53, hw, len * 0.46);
+  ctx.lineTo(hw * 0.75, -len * 0.02); ctx.quadraticCurveTo(hw * 0.5, -len * 0.1, len * 0.075, -len * 0.19);
+  ctx.lineTo(len * 0.075, -len * 0.25); ctx.lineTo(-len * 0.075, -len * 0.25); ctx.lineTo(-len * 0.075, -len * 0.19);
+  ctx.quadraticCurveTo(-hw * 0.5, -len * 0.1, -hw * 0.75, -len * 0.02); ctx.closePath();
+  ctx.fill(); ctx.stroke();
+  // four tines
+  const tw = len * 0.026, tl = len * 0.25;
+  for (let i = 0; i < 4; i += 1) {
+    const tx = -len * 0.06 + i * len * 0.04;
+    ctx.beginPath(); ctx.roundRect(tx - tw / 2, -len * 0.25 - tl, tw, tl + len * 0.02, tw / 2); ctx.fill(); ctx.stroke();
+  }
+  ctx.strokeStyle = 'rgba(255,255,255,0.5)'; ctx.lineWidth = Math.max(1, len * 0.009);
+  ctx.beginPath(); ctx.moveTo(-hw * 0.4, len * 0.42); ctx.lineTo(-hw * 0.3, len * 0.02); ctx.stroke();
+  ctx.restore();
+}
+function knife(ctx, x, y, len, k) {
+  ctx.save(); ctx.translate(x, y); ctx.rotate(0.05);
+  softShadow(ctx, len * 0.035, len * 0.045, len * 0.08, len * 0.5, 0.26, k);
+  const hw = len * 0.042;
+  ctx.strokeStyle = 'rgba(50,52,58,0.3)'; ctx.lineWidth = Math.max(1, len * 0.006);
+  // the handle
+  ctx.fillStyle = steel(ctx, -len * 0.08, len * 0.08);
+  ctx.beginPath();
+  ctx.moveTo(-hw, len * 0.46); ctx.quadraticCurveTo(0, len * 0.53, hw, len * 0.46);
+  ctx.lineTo(hw * 0.9, len * 0.02); ctx.lineTo(-hw * 0.9, len * 0.02); ctx.closePath();
+  ctx.fill(); ctx.stroke();
+  // the blade: a straight back on the right, the edge curving up to the tip
+  const bg = ctx.createLinearGradient(-len * 0.06, 0, len * 0.05, 0);
+  bg.addColorStop(0, '#f7f8f6'); bg.addColorStop(0.5, '#dcdee0'); bg.addColorStop(1, '#9ea3a8');
+  ctx.fillStyle = bg;
+  ctx.beginPath();
+  ctx.moveTo(-len * 0.05, len * 0.02); ctx.lineTo(len * 0.038, len * 0.02); ctx.lineTo(len * 0.038, -len * 0.4);
+  ctx.quadraticCurveTo(len * 0.038, -len * 0.5, 0, -len * 0.5);
+  ctx.quadraticCurveTo(-len * 0.062, -len * 0.3, -len * 0.05, len * 0.02); ctx.closePath();
+  ctx.fill(); ctx.stroke();
+  ctx.strokeStyle = 'rgba(255,255,255,0.6)'; ctx.lineWidth = Math.max(1, len * 0.008);
+  ctx.beginPath(); ctx.moveTo(-len * 0.047, 0); ctx.quadraticCurveTo(-len * 0.058, -len * 0.3, -len * 0.004, -len * 0.49); ctx.stroke();
+  ctx.restore();
+}
+
 export function buildProps({ box, mobile, pxPerUnit }) {
   const out = [];
   // ---- 06: the pot
@@ -325,6 +379,12 @@ export function buildProps({ box, mobile, pxPerUnit }) {
       chicken(ctx, X(box.cx - r * 0.2), Y(box.cy + r * 0.22), r * k * 0.76, -0.62, 3);
       salad(ctx, X(box.cx - r * 0.38), Y(box.cy - r * 0.36), r * k * 0.27, 5);
     }));
+    // a fork on the left and a knife on the right, each on its own small canvas
+    const cl = r * 1.35, cw = r * 0.42, ch = r * 1.5;
+    for (const [side, draw] of [[-1, fork], [1, knife]]) {
+      const cx = box.cx + side * r * 1.2;
+      out.push(prop(7, 'back', cx, box.cy, cw, ch, pxPerUnit, (ctx, X, Y, k) => draw(ctx, X(cx), Y(box.cy), cl * k, k)));
+    }
   }
   // ---- 08: the table, from above: boards, and a plate at each place
   {
